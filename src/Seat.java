@@ -1,11 +1,13 @@
-/**
- * Title
- * Description
- * Copyright    (c) 2017 Copyright Holder All Rights Reserved.
- *
- * @author Question
- * @date 02/04/2017
+/*
+ * Created by Question on 2/4/2017
+ * Copyright (c) 2017. All Rights Reserved.
  */
+
+/**
+ * Title        Seat.java
+ * Description
+ */
+
 public class Seat {
 	private int column;
 	private String row;

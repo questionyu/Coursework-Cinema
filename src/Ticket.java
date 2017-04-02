@@ -1,11 +1,13 @@
-/**
- * Title
- * Description
- * Copyright    (c) 2017 Copyright Holder All Rights Reserved.
- *
- * @author Question
- * @date 02/04/2017
+/*
+ * Created by Question on 2/4/2017
+ * Copyright (c) 2017. All Rights Reserved.
  */
+
+/**
+ * Title        Ticket.java
+ * Description
+ */
+
 public class Ticket {
 	public static final int ChildDiscount = 0;
 	public static final int AdultDiscount = 1;

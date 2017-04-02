@@ -1,39 +1,38 @@
+/*
+ * Created by Question on 1/4/2017
+ * Copyright (c) 2017. All Rights Reserved.
+ */
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * Title        CustomerGUI.java
  * Description
- * Copyright    (c) 2017 Copyright Holder All Rights Reserved.
- *
- * @author Question
- * @date 01/04/2017
  */
 
 public class CustomerGUI {
-	private JFrame frame = new JFrame("Self-service Ticketing Ticketing Kiosk");
-
-	private int width = (int) ((float) (Toolkit.getDefaultToolkit().getScreenSize().width) / 2);
-	private int height = (int) ((float) (Toolkit.getDefaultToolkit().getScreenSize().width) / 2);
-
-	/**
-	 * Program starts here.
-	 */
-	public static void main(String[] args) {
-		new CustomerGUI();
-	}
-
 	/**
 	 * This method create a JFrame and set some settings.
 	 */
 	private CustomerGUI() {
 
 		// Set up the frame and display it.
+		JFrame frame = new JFrame("Self-service Ticketing Kiosk");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setBackground(new Color(90, 154, 212));
-		frame.setSize(width, height);
+		frame.setSize(960, 540);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
+
+		frame.add(new Kiosk());
 		frame.setVisible(true);
+	}
+
+	/**
+	 * Program starts here.
+	 */
+	public static void main(String[] args) {
+		new CustomerGUI();
 	}
 }

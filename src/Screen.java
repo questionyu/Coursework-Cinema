@@ -1,6 +1,13 @@
-/**
- * Created by Question on 01/04/2017.
+/*
+ * Created by Question on 1/4/2017
+ * Copyright (c) 2017. All Rights Reserved.
  */
+
+/**
+ * Title        Screen.java
+ * Description
+ */
+
 public class Screen {
 	private int screenNum;
 	private String movieName;

@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Title
+ * Title        CustomerGUI.java
  * Description
  * Copyright    (c) 2017 Copyright Holder All Rights Reserved.
  *
@@ -11,7 +11,7 @@ import java.awt.*;
  */
 
 public class CustomerGUI {
-	private JFrame frame = new JFrame("Self-service Ticketing");
+	private JFrame frame = new JFrame("Self-service Ticketing Ticketing Kiosk");
 
 	private int width = (int) ((float) (Toolkit.getDefaultToolkit().getScreenSize().width) / 2);
 	private int height = (int) ((float) (Toolkit.getDefaultToolkit().getScreenSize().width) / 2);

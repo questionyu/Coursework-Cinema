@@ -5,15 +5,15 @@ public class Screen {
 	private int screenNum;
 	private String movieName;
 
-	protected Screen(int screenNum) {
+	Screen(int screenNum) {
 		this.screenNum = screenNum;
 	}
 
-	protected int getScreenNum() {
+	int getScreenNum() {
 		return screenNum;
 	}
 
-	protected String getMovieName() {
+	String getMovieName() {
 		return movieName;
 	}
 }

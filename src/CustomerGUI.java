@@ -10,56 +10,85 @@ import java.awt.event.ActionListener;
 
 /**
  * Title        CustomerGUI.java
- * Description
+ * Description  This class create GUI of Kiosk.
  */
 
-public class CustomerGUI implements ActionListener {
-	private static void createAndShowGUI() {
-		// Set up the frame and display it.
-		JFrame frame = new JFrame("Self-service Ticketing Kiosk");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(960, 540);
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
+public class CustomerGUI extends JFrame implements ActionListener {
+	private JButton exitButton;
+	private Color backgroundColor;
 
-		CustomerGUI demo = new CustomerGUI();
-		frame.setContentPane(demo.createCinemaKiosk());
-		frame.setVisible(true);
+	/**
+	 *
+	 */
+	private CustomerGUI() {
+		// Set up the frame and display it.
+		super("Self-service Ticketing Kiosk");
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setSize(960, 540);
+		setResizable(false);
+		setLocationRelativeTo(null);
+		setVisible(true);
+
+		exitButton = new JButton("Exit");
+		exitButton.setFont(new Font("Segoe UI", Font.BOLD, 30));
+		exitButton.addActionListener(e -> System.exit(0));
+
+		backgroundColor = new Color(90, 154, 212);
 	}
 
 	/**
 	 * Program starts here.
+	 *
+	 * @param args The input parameters.
 	 */
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(CustomerGUI::createAndShowGUI);
+		SwingUtilities.invokeLater(() -> (new CustomerGUI()).welcomeScreen());
 	}
 
 	/**
 	 * This method create a JPanel and set some settings.
 	 */
-	private JPanel createCinemaKiosk() {
-		JPanel totalGUI = new JPanel();
-		totalGUI.setLayout(new BorderLayout());
-		totalGUI.setBackground(new Color(90, 154, 212));
-		JLabel helloLabel = new JLabel("Welcome!", JLabel.CENTER);
-		helloLabel.setFont(new Font("Helvetica", Font.BOLD, 50));
-		helloLabel.setForeground(Color.BLACK);
+	private void welcomeScreen() {
+		JPanel welcomePanel = new JPanel(new BorderLayout());
+		welcomePanel.setBackground(backgroundColor);
+
+		JLabel welcomeLabel = new JLabel("Welcome!", JLabel.CENTER);
+		welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 50));
+
+		JPanel welcomeSouthPanel = new JPanel();
+		welcomeSouthPanel.setOpaque(false);
 
 		JButton enter = new JButton("Enter");
-		enter.setFont(new Font("Helvetica", Font.BOLD, 30));
-		enter.setForeground(Color.BLACK);
-		enter.addActionListener(e -> {
-		});
-		JPanel helloSouthPanel = new JPanel();
-		helloSouthPanel.setOpaque(false);
-		helloSouthPanel.add(enter);
+		enter.setFont(new Font("Segoe UI", Font.BOLD, 30));
+		enter.addActionListener(e -> listFilm());
 
-		totalGUI.add(helloLabel, BorderLayout.CENTER);
-		totalGUI.add(helloSouthPanel, BorderLayout.SOUTH);
+		welcomeSouthPanel.add(enter);
 
-		return totalGUI;
+		welcomePanel.add(welcomeLabel, BorderLayout.CENTER);
+		welcomePanel.add(welcomeSouthPanel, BorderLayout.SOUTH);
+
+		setContentPane(welcomePanel);
+		validate();
+		//setVisible(true);
 	}
 
+	private void listFilm() {
+		JPanel listFilmPanel = new JPanel(new BorderLayout());
+		listFilmPanel.setBackground(backgroundColor);
+
+		JPanel listFilmSouthPanel = new JPanel();
+		listFilmSouthPanel.setOpaque(false);
+		listFilmSouthPanel.add(exitButton);
+
+		listFilmPanel.add(listFilmSouthPanel, BorderLayout.SOUTH);
+
+		setContentPane(listFilmPanel);
+		validate();
+	}
+
+	/**
+	 * @param e Action event.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

@@ -4,7 +4,6 @@
  */
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Title        CustomerGUI.java
@@ -20,12 +19,11 @@ public class CustomerGUI {
 		// Set up the frame and display it.
 		JFrame frame = new JFrame("Self-service Ticketing Kiosk");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setBackground(new Color(90, 154, 212));
 		frame.setSize(960, 540);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 
-		frame.add(new Kiosk());
+		frame.setContentPane(new Kiosk());
 		frame.setVisible(true);
 	}
 
@@ -33,6 +31,6 @@ public class CustomerGUI {
 	 * Program starts here.
 	 */
 	public static void main(String[] args) {
-		new CustomerGUI();
+		SwingUtilities.invokeLater(CustomerGUI::new);
 	}
 }

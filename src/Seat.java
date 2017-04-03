@@ -3,12 +3,14 @@
  * Copyright (c) 2017. All Rights Reserved.
  */
 
+import javax.swing.*;
+
 /**
  * Title        Seat.java
  * Description
  */
 
-public class Seat {
+public class Seat extends JButton {
 	private int column;
 	private String row;
 	private String seatNum;

@@ -10,18 +10,18 @@ import java.awt.*;
  * Title        Kiosk.java
  * Description
  */
-public class Kiosk extends JPanel {
+
+class Kiosk extends JPanel {
 
 	Kiosk() {
-		super(new BorderLayout());
-		setOpaque(false);
-
+		setLayout(new BorderLayout());
+		setBackground(new Color(90, 154, 212));
 		JLabel helloLabel = new JLabel("Welcome!", JLabel.CENTER);
-		helloLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
+		helloLabel.setFont(new Font("Helvetica", Font.BOLD, 50));
 		helloLabel.setForeground(Color.BLACK);
 
 		JButton enter = new JButton("Enter");
-		enter.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+		enter.setFont(new Font("Helvetica", Font.BOLD, 30));
 		enter.setForeground(Color.BLACK);
 		enter.addActionListener(e -> {
 		});

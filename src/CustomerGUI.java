@@ -12,10 +12,11 @@ import java.awt.event.ActionListener;
  * Title        CustomerGUI.java
  * Description  This class create GUI of Kiosk.
  */
-
 public class CustomerGUI extends JFrame implements ActionListener {
-	private JButton exitButton;
+	private JButton exitButton, backButton;
+	private Font buttonFont;
 	private Color backgroundColor;
+	private KioskInterface kioskInterface;
 
 	/**
 	 *
@@ -29,11 +30,18 @@ public class CustomerGUI extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		setVisible(true);
 
+		buttonFont = new Font("Segoe UI", Font.PLAIN, 30);
+
 		exitButton = new JButton("Exit");
-		exitButton.setFont(new Font("Segoe UI", Font.BOLD, 30));
+		exitButton.setFont(buttonFont);
 		exitButton.addActionListener(e -> System.exit(0));
 
+		backButton = new JButton("Back");
+		backButton.setFont(buttonFont);
+
 		backgroundColor = new Color(90, 154, 212);
+
+		kioskInterface = new KioskInterface();
 	}
 
 	/**
@@ -59,7 +67,7 @@ public class CustomerGUI extends JFrame implements ActionListener {
 		welcomeSouthPanel.setOpaque(false);
 
 		JButton enter = new JButton("Enter");
-		enter.setFont(new Font("Segoe UI", Font.BOLD, 30));
+		enter.setFont(new Font("Segoe UI", Font.PLAIN, 30));
 		enter.addActionListener(e -> listFilm());
 
 		welcomeSouthPanel.add(enter);
@@ -69,7 +77,6 @@ public class CustomerGUI extends JFrame implements ActionListener {
 
 		setContentPane(welcomePanel);
 		validate();
-		//setVisible(true);
 	}
 
 	private void listFilm() {
@@ -77,8 +84,14 @@ public class CustomerGUI extends JFrame implements ActionListener {
 		listFilmPanel.setBackground(backgroundColor);
 
 		JPanel listFilmSouthPanel = new JPanel();
+		listFilmSouthPanel.setLayout(new BoxLayout(listFilmSouthPanel, BoxLayout.X_AXIS));
 		listFilmSouthPanel.setOpaque(false);
 		listFilmSouthPanel.add(exitButton);
+		listFilmSouthPanel.add(Box.createHorizontalGlue());
+		listFilmSouthPanel.add(backButton);
+		listFilmSouthPanel.add(Box.createHorizontalGlue());
+		//listFilmSouthPanel.add();
+		listFilmSouthPanel.add(Box.createHorizontalGlue());
 
 		listFilmPanel.add(listFilmSouthPanel, BorderLayout.SOUTH);
 

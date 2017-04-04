@@ -7,8 +7,7 @@
  * Title        Screen.java
  * Description
  */
-
-public class Screen {
+class Screen {
 	private int screenNum;
 	private String movieName;
 

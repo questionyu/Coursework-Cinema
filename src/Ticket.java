@@ -7,8 +7,7 @@
  * Title        Ticket.java
  * Description
  */
-
-public class Ticket {
+class Ticket {
 	public static final int ChildDiscount = 0;
 	public static final int AdultDiscount = 1;
 	public static final int SeniorDiscount = 2;

@@ -3,7 +3,7 @@ import java.awt.*;
 
 /**
  * Title        WelcomeScreen.java
- * Description
+ * Description  This class shows a welcome on the screen.
  */
 class WelcomeScreen extends JPanel {
 	WelcomeScreen(KioskInterface kioskInterface) {

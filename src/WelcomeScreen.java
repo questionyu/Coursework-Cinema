@@ -13,14 +13,13 @@ class WelcomeScreen extends JPanel {
 		JLabel welcomeLabel = new JLabel("Welcome!", JLabel.CENTER);
 		welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 50));
 
+		JButton enterButton = new JButton("Enter");
+		enterButton.setFont(new Font("Segoe UI", Font.PLAIN, 30));
+		enterButton.addActionListener(e -> kioskInterface.listFilm());
+
 		JPanel welcomeSouthPanel = new JPanel();
-		welcomeSouthPanel.setOpaque(false); // Make this panel transparent.
-
-		JButton enter = new JButton("Enter");
-		enter.setFont(new Font("Segoe UI", Font.PLAIN, 30));
-		enter.addActionListener(e -> kioskInterface.listFilm());
-
-		welcomeSouthPanel.add(enter);
+		welcomeSouthPanel.setOpaque(false);
+		welcomeSouthPanel.add(enterButton);
 
 		add(welcomeLabel, BorderLayout.CENTER);
 		add(welcomeSouthPanel, BorderLayout.SOUTH);

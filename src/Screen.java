@@ -1,8 +1,3 @@
-/*
- * Created by Question on 1/4/2017
- * Copyright (c) 2017. All Rights Reserved.
- */
-
 /**
  * Title        Screen.java
  * Description

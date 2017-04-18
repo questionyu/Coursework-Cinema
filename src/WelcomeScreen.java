@@ -1,25 +1,14 @@
-/*
- * Created by Question on 17/4/2017
- * Copyright (c) 2017. All Rights Reserved.
- */
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 /**
- * Title
+ * Title        WelcomeScreen.java
  * Description
  */
-class WelcomeScreen extends JFrame {
+class WelcomeScreen extends JPanel {
 	WelcomeScreen(KioskInterface kioskInterface) {
-		super("Self-service Ticketing Kiosk");
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(960, 540);
-		setResizable(false);
-		setLocationRelativeTo(null);
-
-		setBackground(kioskInterface.getBackgroundColor());
+		super(new BorderLayout());
+		setOpaque(false);
 
 		JLabel welcomeLabel = new JLabel("Welcome!", JLabel.CENTER);
 		welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 50));
@@ -29,18 +18,11 @@ class WelcomeScreen extends JFrame {
 
 		JButton enter = new JButton("Enter");
 		enter.setFont(new Font("Segoe UI", Font.PLAIN, 30));
-		enter.addActionListener((ActionEvent e) -> {
-			dispose();
-			kioskInterface.listFilm();
-		});
+		enter.addActionListener(e -> kioskInterface.listFilm());
 
 		welcomeSouthPanel.add(enter);
 
 		add(welcomeLabel, BorderLayout.CENTER);
 		add(welcomeSouthPanel, BorderLayout.SOUTH);
-
-		setVisible(true);
 	}
-
-
 }

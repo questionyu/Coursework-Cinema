@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 class ListFilmScreen extends JPanel implements ActionListener {
 	private static int showQuantity = 5;
 	private JButton[] numButton = new JButton[showQuantity];
+	private float testfloat;
 
 	/**
 	 *

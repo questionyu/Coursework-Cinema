@@ -19,6 +19,7 @@ class KioskInterface {
 	private CardLayout kioskCardLayout;
 	private JPanel kioskPanel;
 	private Color backgroundColor = new Color(90, 154, 212);
+	private int testint;
 
 	private KioskInterface() {
 		kioskFrame = new JFrame("Self-service Ticketing Kiosk");

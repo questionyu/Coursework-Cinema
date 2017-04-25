@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cinema>
+    <film>
+        <name>KONG: SKULL ISLAND</name>
+        <length>118</length>
+        <price>10</price>
+        <screenings>1/2017-04-26-15-30</screenings>
+        <screenings>1/2017-04-26-18-30</screenings>
+        <screenings>1/2017-04-26-21-00</screenings>
+        <screenings>2/2017-04-26-20-00</screenings>
+        <screenings>3/2017-04-26-20-30</screenings>
+    </film>
+    <film>
+        <name>LOGAN</name>
+        <length>135</length>
+        <price>10</price>
+        <screenings>3/2017-04-26-15-30</screenings>
+        <screenings>3/2017-04-26-18-00</screenings>
+    </film>
+    <film>
+        <name>BEAUTY AND THE BEAST</name>
+        <length>130</length>
+        <price>10</price>
+        <screenings>1/2017-04-26-15-30</screenings>
+    </film>
+    <film>
+        <name>MOONLIGHT</name>
+        <length>111</length>
+        <price>10</price>
+        <screenings>1/2017-04-26-10-00</screenings>
+        <screenings>1/2017-04-26-12-30</screenings>
+        <screenings>3/2017-04-26-10-30</screenings>
+        <screenings>3/2017-04-26-13-00</screenings>
+    </film>
+    <film>
+        <name>LA LA LAND</name>
+        <length>128</length>
+        <price>10</price>
+        <screenings>2/2017-04-26-10-30</screenings>
+        <screenings>2/2017-04-26-13-00</screenings>
+    </film>
+</cinema>

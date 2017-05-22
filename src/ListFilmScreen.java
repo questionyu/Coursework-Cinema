@@ -12,7 +12,7 @@ class ListFilmScreen extends JPanel implements ActionListener {
 	private JButton[] numButton;
 
 	/**
-	 *
+	 * Constructor.
 	 */
 	ListFilmScreen(KioskInterface kioskInterface) {
 		super(new BorderLayout());
@@ -32,22 +32,14 @@ class ListFilmScreen extends JPanel implements ActionListener {
 
 		numButton = new JButton[showQuantity];
 		JPanel[] filmPanel = new JPanel[showQuantity];
-		ImageIcon[] image = new ImageIcon[showQuantity];
 		JLabel[] label = new JLabel[showQuantity];
 
 		String[] labelString = new String[showQuantity];
+		ImageIcon[] image = new ImageIcon[showQuantity];
 		for (int i = 0; i < showQuantity; i++) {
 			labelString[i] = "<html>" + films.get(i).getName() + "<br>" + films.get(i).getLength() + "min</html>";
+			image[i] = films.get(i).getImage();
 		}
-
-		//TODO replace 'new ImageIcon' with 'getFilm'
-		//TODO add image url to xml file
-//		kioskInterface.getFilm();
-		image[0] = new ImageIcon("images/kong.jpg");
-		image[1] = new ImageIcon("images/logan.jpg");
-		image[2] = new ImageIcon("images/beauty-and-the-beasts.jpg");
-		image[3] = new ImageIcon("images/moonlight.jpg");
-		image[4] = new ImageIcon("images/la-la-land.jpg");
 
 		add(filmPosterPanel, BorderLayout.CENTER);
 		for (int i = 0; i < showQuantity; i++) {

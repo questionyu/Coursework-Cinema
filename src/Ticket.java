@@ -1,12 +1,12 @@
 /**
  * Title        Ticket.java
- * Description
+ * Description  This class defines a ticket.
  */
 class Ticket {
-	public static final int ChildDiscount = 0;
-	public static final int AdultDiscount = 1;
-	public static final int SeniorDiscount = 2;
-	public static final int StudentDiscount = 3;
+	static final int ChildDiscount = 0;
+	static final int AdultDiscount = 1;
+	static final int SeniorDiscount = 2;
+	static final int StudentDiscount = 3;
 
 	private int ticketNum;
 	private int ticketType;
@@ -35,18 +35,18 @@ class Ticket {
 	}
 
 	/**
-	 * This method get the ticket number.
+	 * This method returns the ticket number.
 	 *
-	 * @return ticketNum Ticket number.
+	 * @return Ticket number.
 	 */
 	int getTicketNum() {
 		return ticketNum;
 	}
 
 	/**
-	 * This method get the type of ticket.
+	 * This method returns the type of ticket.
 	 *
-	 * @return String A string variable which save the type of ticket.
+	 * @return A string variable which save the type of ticket.
 	 */
 	String getTicketType() {
 		switch (ticketType) {

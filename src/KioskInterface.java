@@ -23,7 +23,16 @@ class KioskInterface {
 	private CardLayout kioskCardLayout;
 	private JPanel kioskPanel;
 
+	/**
+	 * Constructor function of KioskInterface.
+	 * This function creates a JFrame to contain a JPanel which uses CardLayout to display all things.
+	 */
 	private KioskInterface() {
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 		JFrame kioskFrame = new JFrame("Self-service Ticketing Kiosk");
 		kioskFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		kioskFrame.setSize(960, 540);
@@ -47,16 +56,25 @@ class KioskInterface {
 		SwingUtilities.invokeLater(() -> (new KioskInterface()).welcome());
 	}
 
+	/**
+	 * This function creates a welcome panel and adds it to CardLayout and to shows it.
+	 */
 	private void welcome() {
 		kioskPanel.add(new WelcomeScreen(this), "WelcomeScreen");
 		kioskCardLayout.show(kioskPanel, "WelcomeScreen");
 	}
 
+	/**
+	 * This function creates a listFilm panel and adds it to CardLayout.
+	 */
 	void listFilm() {
 		kioskPanel.add(new ListFilmScreen(this), "ListFilmScreen");
 		showListFilm();
 	}
 
+	/**
+	 * This function shows listFilm panel to let users see all films.
+	 */
 	void showListFilm() {
 		kioskCardLayout.show(kioskPanel, "ListFilmScreen");
 	}
@@ -66,7 +84,12 @@ class KioskInterface {
 		return ReadXMLFile(new File("films.xml"));
 	}
 
-	//TODO read film information from xml file
+	/**
+	 * This function read films form xml and save to an ArrayList, and return it.
+	 *
+	 * @param file The xml file which you want to read from.
+	 * @return the ArrayList which contains all films.
+	 */
 	private ArrayList<Film> ReadXMLFile(File file) {
 		ArrayList<Film> films = new ArrayList<>();
 		try {
@@ -79,14 +102,15 @@ class KioskInterface {
 				if (filmNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element filmElement = (Element) filmNode;
 					String name = filmElement.getElementsByTagName("name").item(0).getTextContent();
-					int length = Integer.valueOf(filmElement.getElementsByTagName("length").item(0).getTextContent());
-					double price = Double.valueOf(filmElement.getElementsByTagName("price").item(0).getTextContent());
+					String imageUrl = filmElement.getElementsByTagName("imageUrl").item(0).getTextContent();
+					int length = Integer.parseInt(filmElement.getElementsByTagName("length").item(0).getTextContent());
+					double price = Double.parseDouble(filmElement.getElementsByTagName("price").item(0).getTextContent());
 					NodeList screeningsList = filmElement.getElementsByTagName("screenings");
 					ArrayList<String> screenings = new ArrayList<>();
 					for (int j = 0; j < screeningsList.getLength(); j++) {
 						screenings.add(screeningsList.item(j).getTextContent());
 					}
-					films.add(new Film(name, length, price, screenings));
+					films.add(new Film(name, imageUrl, length, price, screenings));
 				}
 
 			}
@@ -96,12 +120,17 @@ class KioskInterface {
 		return films;
 	}
 
-	//TODO edit xml file for manager or adding movie
+	/**
+	 * This function save ArrayList of films to xml file.
+	 *
+	 * @param films The ArrayList which contains all films which you want to save to file.
+	 */
 	private void CreateXMLFile(ArrayList<Film> films) {
 		Document doc;
 		Element cinema;
 		Element film;
 		Element name;
+		Element imageUrl;
 		Element length;
 		Element price;
 		Element screenings;
@@ -117,6 +146,10 @@ class KioskInterface {
 				name = doc.createElement("name");
 				name.appendChild(doc.createTextNode(film1.getName()));
 				film.appendChild(name);
+
+				imageUrl = doc.createElement("imageUrl");
+				imageUrl.appendChild(doc.createTextNode(film1.getImageUrl()));
+				film.appendChild(imageUrl);
 
 				length = doc.createElement("length");
 				length.appendChild(doc.createTextNode("" + film1.getLength()));
@@ -139,7 +172,7 @@ class KioskInterface {
 			DOMSource source = new DOMSource(doc);
 			StreamResult result = new StreamResult(new File("films.xml"));
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");//增加换行缩进，但此时缩进默认为0
-			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");//设置缩进为2
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");//设置缩进为4
 			transformer.transform(source, result);
 		} catch (Exception e) {
 			e.printStackTrace();

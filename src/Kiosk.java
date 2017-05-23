@@ -16,18 +16,20 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Title        KioskInterface.java
+ * Title        Kiosk.java
  * Description  This class contains the kiosk interface's definition.
  */
-class KioskInterface {
+class Kiosk {
+	private Cinema cinema;
 	private CardLayout kioskCardLayout;
 	private JPanel kioskPanel;
 
 	/**
-	 * Constructor function of KioskInterface.
+	 * Constructor function of Kiosk.
 	 * This function creates a JFrame to contain a JPanel which uses CardLayout to display all things.
 	 */
-	private KioskInterface() {
+	private Kiosk() {
+		cinema = new Cinema(getFilmFromFile());
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
@@ -41,7 +43,6 @@ class KioskInterface {
 
 		kioskCardLayout = new CardLayout();
 		kioskPanel = new JPanel(kioskCardLayout);
-		kioskPanel.setBackground(new Color(90, 154, 212));
 		kioskFrame.add(kioskPanel);
 
 		kioskFrame.setVisible(true);
@@ -53,22 +54,22 @@ class KioskInterface {
 	 * @param args The input parameters.
 	 */
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> (new KioskInterface()).welcome());
+		SwingUtilities.invokeLater(() -> (new Kiosk()).welcome());
 	}
 
 	/**
 	 * This function creates a welcome panel and adds it to CardLayout and to shows it.
 	 */
 	private void welcome() {
-		kioskPanel.add(new WelcomeScreen(this), "WelcomeScreen");
-		kioskCardLayout.show(kioskPanel, "WelcomeScreen");
+		kioskPanel.add(new GUIWelcome(this), "GUIWelcome");
+		kioskCardLayout.show(kioskPanel, "GUIWelcome");
 	}
 
 	/**
 	 * This function creates a listFilm panel and adds it to CardLayout.
 	 */
 	void listFilm() {
-		kioskPanel.add(new ListFilmScreen(this), "ListFilmScreen");
+		kioskPanel.add(new GUIListFilm(this), "GUIListFilm");
 		showListFilm();
 	}
 
@@ -76,26 +77,38 @@ class KioskInterface {
 	 * This function shows listFilm panel to let users see all films.
 	 */
 	void showListFilm() {
-		kioskCardLayout.show(kioskPanel, "ListFilmScreen");
+		kioskCardLayout.show(kioskPanel, "GUIListFilm");
 	}
 
-	//TODO maybe getFilm and ReadXMLFile can merge
-	ArrayList<Film> getFilm() {
-		return ReadXMLFile(new File("films.xml"));
+	void listScreening(int i) {
+		kioskPanel.add(new GUIListScreening(this, cinema.getFilm(i)), "GUIListScreenings");
+		showListScreening();
+	}
+
+	void showListScreening() {
+		kioskCardLayout.show(kioskPanel, "GUIListScreenings");
+	}
+
+	void listSeat() {
+		kioskPanel.add(new GUIListSeat(), "GUIListSeat");
+		showListSeat();
+	}
+
+	void showListSeat() {
+		kioskCardLayout.show(kioskPanel, "GUIListSeat");
 	}
 
 	/**
 	 * This function read films form xml and save to an ArrayList, and return it.
 	 *
-	 * @param file The xml file which you want to read from.
 	 * @return the ArrayList which contains all films.
 	 */
-	private ArrayList<Film> ReadXMLFile(File file) {
+	private ArrayList<Film> getFilmFromFile() {
 		ArrayList<Film> films = new ArrayList<>();
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.parse(file);
+			Document doc = builder.parse(new File("films.xml"));
 			NodeList filmList = doc.getElementsByTagName("film");
 			for (int i = 0; i < filmList.getLength(); i++) {
 				Node filmNode = filmList.item(i);
@@ -125,7 +138,7 @@ class KioskInterface {
 	 *
 	 * @param films The ArrayList which contains all films which you want to save to file.
 	 */
-	private void CreateXMLFile(ArrayList<Film> films) {
+	private void writeFilmToFile(ArrayList<Film> films) {
 		Document doc;
 		Element cinema;
 		Element film;
@@ -177,5 +190,9 @@ class KioskInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public ArrayList<Film> getFilms() {
+		return cinema.getFilms();
 	}
 }

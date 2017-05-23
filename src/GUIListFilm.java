@@ -2,21 +2,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 /**
- * Title        ListFilmScreen.java
+ * Title        .java
  * Description  This class shows the films' posters.
  */
-class ListFilmScreen extends JPanel implements ActionListener {
+class GUIListFilm extends JPanel implements ActionListener {
+	private Kiosk kiosk;
 	private JButton[] numButton;
 
 	/**
 	 * Constructor.
 	 */
-	ListFilmScreen(KioskInterface kioskInterface) {
+	GUIListFilm(Kiosk kiosk) {
 		super(new BorderLayout());
-		setOpaque(false);
+		this.kiosk = kiosk;
 
 		Font buttonFont = new Font("Segoe UI", Font.PLAIN, 25);
 
@@ -27,7 +30,7 @@ class ListFilmScreen extends JPanel implements ActionListener {
 		JPanel filmPosterPanel = new JPanel(new GridLayout(3, 2));
 		filmPosterPanel.setOpaque(false);
 
-		ArrayList<Film> films = kioskInterface.getFilm();
+		ArrayList<Film> films = kiosk.getFilms();
 		int showQuantity = films.size();
 
 		numButton = new JButton[showQuantity];
@@ -50,7 +53,7 @@ class ListFilmScreen extends JPanel implements ActionListener {
 			label[i].setFont(buttonFont);
 			numButton[i] = new JButton("BUY");
 			numButton[i].setFont(buttonFont);
-			numButton[i].addActionListener(this);
+			numButton[i].addMouseListener(new buyActionListener(i));
 			filmPanel[i].add(label[i], BorderLayout.WEST);
 			filmPanel[i].add(numButton[i], BorderLayout.EAST);
 			filmPosterPanel.add(filmPanel[i]);
@@ -75,6 +78,19 @@ class ListFilmScreen extends JPanel implements ActionListener {
 		for (JButton button : numButton) {
 			if (eventObject.equals(button))
 				System.out.println(button.getText());
+		}
+	}
+
+	class buyActionListener extends MouseAdapter {
+		int i;
+
+		buyActionListener(int i) {
+			this.i = i;
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			kiosk.listScreening(i);
 		}
 	}
 }

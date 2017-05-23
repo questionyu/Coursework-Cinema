@@ -1,13 +1,34 @@
 /**
  * Title        Screen.java
- * Description
+ * Description  This class defines three screens.
  */
 class Screen {
 	private int screenNum;
 	private String movieName;
+	private int[] seats;
 
 	Screen(int screenNum) {
-		this.screenNum = screenNum;
+		switch (screenNum) {
+			case 1:
+				seats = new int[]{1, 1, 1, 1, 0, 1, 1, 1, 1,
+						1, 1, 1, 1, 0, 1, 1, 1, 1,
+						1, 1, 1, 1, 0, 1, 1, 1, 1,
+						1, 1, 1, 1, 0, 1, 1, 1, 1};
+				break;
+			case 2:
+				seats = new int[]{1, 1, 1, 1, 0, 1, 1, 1, 1,
+						1, 1, 1, 1, 0, 1, 1, 1, 1,
+						1, 1, 1, 1, 0, 1, 1, 1, 1,
+						1, 1, 1, 1, 0, 1, 1, 1, 1};
+				break;
+			case 3:
+				seats = new int[]{1, 1, 1, 1, 0, 1, 1, 1, 1,
+						1, 1, 1, 1, 0, 1, 1, 1, 1,
+						1, 1, 1, 1, 0, 1, 1, 1, 1,
+						1, 1, 1, 1, 0, 1, 1, 1, 1};
+				break;
+		}
+
 	}
 
 	int getScreenNum() {
@@ -16,5 +37,9 @@ class Screen {
 
 	String getMovieName() {
 		return movieName;
+	}
+
+	int[] getSeats() {
+		return seats;
 	}
 }

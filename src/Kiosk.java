@@ -24,7 +24,6 @@ class Kiosk {
 	private CardLayout kioskCardLayout;
 	private JPanel kioskPanel;
 	private Font buttonFont;
-	private JButton exitButton;
 
 	/**
 	 * Constructor function of Kiosk.
@@ -196,15 +195,11 @@ class Kiosk {
 		}
 	}
 
-	public ArrayList<Film> getFilms() {
+	ArrayList<Film> getFilms() {
 		return cinema.getFilms();
 	}
 
-	public Font getButtonFont() {
+	Font getButtonFont() {
 		return buttonFont;
-	}
-
-	public JButton getExitButton() {
-		return exitButton;
 	}
 }

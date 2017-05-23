@@ -17,7 +17,7 @@ class GUIListSeat extends JPanel {
 
 		String screening = film.getScreenings().get(i);
 		String[] screen = screening.split("/");
-		JPanel seatPanel = new Screen(Integer.parseInt(screen[0]));
+		JPanel seatPanel = new Screen(kiosk, Integer.parseInt(screen[0]));
 
 		JPanel listSeatSouthPanel = new JPanel();
 		listSeatSouthPanel.setLayout(new BoxLayout(listSeatSouthPanel, BoxLayout.X_AXIS));

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,9 +12,14 @@ import java.util.Date;
  * Description  This class list all screenings of one movie.
  */
 class GUIListScreening extends JPanel {
+	private Kiosk kiosk;
+	private Film film;
+
 	GUIListScreening(Kiosk kiosk, Film film) {
 		super(new BorderLayout());
-		Font buttonFont = new Font("Segoe UI", Font.PLAIN, 25);
+		this.kiosk = kiosk;
+		this.film = film;
+		Font buttonFont = kiosk.getButtonFont();
 
 		JPanel listScreeningPanel = new JPanel();
 		listScreeningPanel.setLayout(new BoxLayout(listScreeningPanel, BoxLayout.Y_AXIS));
@@ -48,6 +55,7 @@ class GUIListScreening extends JPanel {
 			SimpleDateFormat ft = new SimpleDateFormat("HH:mm");
 			numButton[i] = new JButton(ft.format(date));
 			numButton[i].setFont(buttonFont);
+			numButton[i].addMouseListener(new mouseAdapter(i));
 			switch (time[0]) {
 				case "1":
 					screenButtonPanel[0].add(numButton[i]);
@@ -83,4 +91,16 @@ class GUIListScreening extends JPanel {
 		add(listScreeningSouthPanel, BorderLayout.SOUTH);
 	}
 
+	class mouseAdapter extends MouseAdapter {
+		int i;
+
+		mouseAdapter(int i) {
+			this.i = i;
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			kiosk.listSeat(film, i);
+		}
+	}
 }

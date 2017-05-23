@@ -23,6 +23,7 @@ class Kiosk {
 	private Cinema cinema;
 	private CardLayout kioskCardLayout;
 	private JPanel kioskPanel;
+	private Font buttonFont;
 
 	/**
 	 * Constructor function of Kiosk.
@@ -40,6 +41,8 @@ class Kiosk {
 		kioskFrame.setSize(960, 540);
 		kioskFrame.setResizable(false);
 		kioskFrame.setLocationRelativeTo(null);
+
+		buttonFont = new Font("Segoe UI", Font.PLAIN, 25);
 
 		kioskCardLayout = new CardLayout();
 		kioskPanel = new JPanel(kioskCardLayout);
@@ -89,8 +92,8 @@ class Kiosk {
 		kioskCardLayout.show(kioskPanel, "GUIListScreenings");
 	}
 
-	void listSeat() {
-		kioskPanel.add(new GUIListSeat(), "GUIListSeat");
+	void listSeat(Film film, int i) {
+		kioskPanel.add(new GUIListSeat(this, film, i), "GUIListSeat");
 		showListSeat();
 	}
 
@@ -192,7 +195,11 @@ class Kiosk {
 		}
 	}
 
-	public ArrayList<Film> getFilms() {
+	ArrayList<Film> getFilms() {
 		return cinema.getFilms();
+	}
+
+	Font getButtonFont() {
+		return buttonFont;
 	}
 }

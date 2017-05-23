@@ -21,7 +21,7 @@ class GUIListFilm extends JPanel implements ActionListener {
 		super(new BorderLayout());
 		this.kiosk = kiosk;
 
-		Font buttonFont = new Font("Segoe UI", Font.PLAIN, 25);
+		Font buttonFont = kiosk.getButtonFont();
 
 		JButton exitButton = new JButton("Exit");
 		exitButton.setFont(buttonFont);

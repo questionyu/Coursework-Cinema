@@ -1,12 +1,19 @@
+import java.awt.*;
+
 /**
  * Title        Ticket.java
  * Description  This class defines a ticket.
  */
 class Ticket {
-	static final int ChildDiscount = 0;
-	static final int AdultDiscount = 1;
-	static final int SeniorDiscount = 2;
-	static final int StudentDiscount = 3;
+	static final int ADULT_DISCOUNT = 1;
+	static final int CHILD_DISCOUNT = 0;
+	static final int SENIOR_DISCOUNT = 2;
+	static final int STUDENT_DISCOUNT = 3;
+
+	static final Color ADULT_COLOR = Color.YELLOW;
+	static final Color CHILD_COLOR = Color.RED;
+	static final Color SENIOR_COLOR = Color.BLUE;
+	static final Color STUDENT_COLOR = Color.PINK;
 
 	private int ticketNum;
 	private int ticketType;
@@ -19,16 +26,16 @@ class Ticket {
 		this.ticketNum = ticketNum;
 		this.ticketType = ticketDiscount;
 		switch (ticketDiscount) {
-			case ChildDiscount:
+			case CHILD_DISCOUNT:
 				this.discount = 0.5;
 				break;
-			case AdultDiscount:
+			case ADULT_DISCOUNT:
 				this.discount = 0;
 				break;
-			case SeniorDiscount:
+			case SENIOR_DISCOUNT:
 				this.discount = 0.2;
 				break;
-			case StudentDiscount:
+			case STUDENT_DISCOUNT:
 				this.discount = 0.15;
 				break;
 		}

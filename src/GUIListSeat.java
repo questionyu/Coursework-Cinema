@@ -10,18 +10,18 @@ import java.awt.event.MouseEvent;
  * Description
  */
 class GUIListSeat extends JPanel {
-	Kiosk kiosk;
 	Film film;
+	private Kiosk kiosk;
 
-	GUIListSeat(Kiosk kiosk, Film film, int i) {
+	GUIListSeat(Kiosk kiosk, Film film, int screeningNo) {
 		super(new BorderLayout());
 		this.kiosk = kiosk;
 
 		Font buttonFont = kiosk.getButtonFont();
 
-		String screening = film.getScreenings().get(i);
+		String screening = film.getScreenings().get(screeningNo);
 		String[] screen = screening.split("/");
-		JPanel seatAndMorePanel = new Screen(kiosk, Integer.parseInt(screen[0]));
+		JPanel selectSeatPanel = new Screen(kiosk, Integer.parseInt(screen[0]));
 
 		JPanel listSeatSouthPanel = new JPanel();
 		listSeatSouthPanel.setLayout(new BoxLayout(listSeatSouthPanel, BoxLayout.X_AXIS));
@@ -38,7 +38,11 @@ class GUIListSeat extends JPanel {
 		listSeatSouthPanel.add(backButton);
 		listSeatSouthPanel.add(Box.createHorizontalGlue());
 
-		add(seatAndMorePanel, BorderLayout.CENTER);
+		JButton confirmButton = new JButton("Confirm");
+		confirmButton.setFont(kiosk.getButtonFont());
+		listSeatSouthPanel.add(confirmButton);
+
+		add(selectSeatPanel, BorderLayout.CENTER);
 		add(listSeatSouthPanel, BorderLayout.SOUTH);
 	}
 }
@@ -98,7 +102,6 @@ class Screen extends JPanel implements ActionListener {
 		rightPanel.add(A);
 
 		for (int[] seat : seats) {
-			int j = seat.length;
 			int num = 0;
 			for (int aSeat : seat) {
 				if (aSeat == 1)
@@ -106,7 +109,7 @@ class Screen extends JPanel implements ActionListener {
 			}
 			for (int aSeat : seat) {
 				if (aSeat == 1) {
-					JButton seatButton = new JButton("" + num);
+					JToggleButton seatButton = new JToggleButton("" + num);
 					seatButton.setFont(kiosk.getButtonFont());
 					seatButton.addMouseListener(new mouseAdapter());
 					seatPanel.add(seatButton);
@@ -118,14 +121,16 @@ class Screen extends JPanel implements ActionListener {
 		}
 
 		JPanel seatAndNumber = new JPanel(new BorderLayout());
-		seatAndNumber.add(seatPanel, BorderLayout.CENTER);
-		seatAndNumber.add(rightPanel, BorderLayout.EAST);
 
 		JPanel screenLabelPanel = new JPanel();
 		JLabel screenLabel = new JLabel("Screen");
 		screenLabel.setFont(kiosk.getButtonFont());
 		screenLabelPanel.setBackground(Color.CYAN);
 		screenLabelPanel.add(screenLabel);
+
+		seatAndNumber.add(seatPanel, BorderLayout.CENTER);
+		seatAndNumber.add(rightPanel, BorderLayout.EAST);
+		seatAndNumber.add(screenLabelPanel, BorderLayout.SOUTH);
 
 		//Radio buttons. To select a ticket type.
 		JRadioButton adult = new JRadioButton("Adult");
@@ -171,7 +176,6 @@ class Screen extends JPanel implements ActionListener {
 
 		add(radioPanel, BorderLayout.WEST);
 		add(seatAndNumber, BorderLayout.CENTER);
-		add(screenLabelPanel, BorderLayout.SOUTH);
 	}
 
 	int getScreenNum() {
@@ -211,8 +215,11 @@ class Screen extends JPanel implements ActionListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			((JButton) e.getSource()).setForeground(selectedColor);
-			((JButton) e.getSource()).setBackground(selectedColor);
+			JToggleButton toggleButton = (JToggleButton) e.getSource();
+			if (toggleButton.isSelected())
+				toggleButton.setForeground(selectedColor);
+			else
+				toggleButton.setForeground(Color.BLACK);
 		}
 	}
 }

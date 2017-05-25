@@ -5,17 +5,13 @@ import java.util.ArrayList;
  * Description  This class defines a cinema.
  */
 class Cinema {
-	private ArrayList<Film> films = new ArrayList<>();
+	static ArrayList<Film> films = new ArrayList<>();
 
-	Cinema(ArrayList<Film> films) {
-		this.films = films;
-	}
-
-	ArrayList<Film> getFilms() {
+	static ArrayList<Film> getFilms() {
 		return films;
 	}
 
-	Film getFilm(int i) {
+	static Film getFilm(int i) {
 		return films.get(i);
 	}
 }

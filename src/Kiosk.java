@@ -20,7 +20,6 @@ import java.util.ArrayList;
  * Description  This class contains the kiosk interface's definition.
  */
 class Kiosk {
-	private Cinema cinema;
 	private CardLayout kioskCardLayout;
 	private JPanel kioskPanel;
 	private Font buttonFont;
@@ -30,7 +29,7 @@ class Kiosk {
 	 * This function creates a JFrame to contain a JPanel which uses CardLayout to display all things.
 	 */
 	private Kiosk() {
-		cinema = new Cinema(getFilmFromFile());
+		Cinema.films = getFilmFromFile();
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
@@ -84,7 +83,7 @@ class Kiosk {
 	}
 
 	void listScreening(int i) {
-		kioskPanel.add(new GUIListScreening(this, cinema.getFilm(i)), "GUIListScreenings");
+		kioskPanel.add(new GUIListScreening(this, Cinema.getFilm(i)), "GUIListScreenings");
 		showListScreening();
 	}
 
@@ -196,7 +195,7 @@ class Kiosk {
 	}
 
 	ArrayList<Film> getFilms() {
-		return cinema.getFilms();
+		return Cinema.getFilms();
 	}
 
 	Font getButtonFont() {

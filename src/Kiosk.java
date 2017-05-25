@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 /**
  * Title        Kiosk.java
- * Description  This class contains the kiosk interface's definition.
+ * Description  This class controls the UI.
  */
 class Kiosk {
 	private CardLayout kioskCardLayout;

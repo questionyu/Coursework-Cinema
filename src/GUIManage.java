@@ -3,7 +3,7 @@ import java.awt.*;
 
 /**
  * Title        GUIManage.java
- * Description  This class defines three screens.
+ * Description  This class defines the UI of management.
  */
 class GUIManage extends JPanel {
 	GUIManage(Kiosk kiosk) {

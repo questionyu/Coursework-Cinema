@@ -52,6 +52,8 @@ class GUIListScreening extends JPanel {
 			} catch (ParseException e) {
 				System.out.println("screening information wrong!" + screenings.get(i));
 			}
+			Date now = new Date();
+			if (now.after(date)) continue;
 			SimpleDateFormat ft = new SimpleDateFormat("HH:mm");
 			numButton[i] = new JButton(ft.format(date));
 			numButton[i].setFont(buttonFont);

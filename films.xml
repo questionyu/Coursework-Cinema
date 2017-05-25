@@ -5,43 +5,43 @@
         <imageUrl>images/kong.jpg</imageUrl>
         <length>118</length>
         <price>16</price>
-        <screenings>1/2017-04-26-15-30</screenings>
-        <screenings>1/2017-04-26-18-30</screenings>
-        <screenings>1/2017-04-26-21-00</screenings>
-        <screenings>2/2017-04-26-20-00</screenings>
-        <screenings>3/2017-04-26-20-30</screenings>
+        <screenings>1/2017-05-25-15-30</screenings>
+        <screenings>1/2017-05-25-18-30</screenings>
+        <screenings>1/2017-05-25-21-00</screenings>
+        <screenings>2/2017-05-25-20-00</screenings>
+        <screenings>3/2017-05-25-20-30</screenings>
     </film>
     <film>
         <name>LOGAN</name>
         <imageUrl>images/logan.jpg</imageUrl>
         <length>135</length>
         <price>16</price>
-        <screenings>3/2017-04-26-15-30</screenings>
-        <screenings>3/2017-04-26-18-00</screenings>
+        <screenings>3/2017-05-25-15-30</screenings>
+        <screenings>3/2017-05-25-18-00</screenings>
     </film>
     <film>
         <name>BEAUTY AND THE BEAST</name>
         <imageUrl>images/beauty-and-the-beasts.jpg</imageUrl>
         <length>130</length>
         <price>16</price>
-        <screenings>1/2017-04-26-15-30</screenings>
+        <screenings>1/2017-05-25-15-30</screenings>
     </film>
     <film>
         <name>MOONLIGHT</name>
         <imageUrl>images/moonlight.jpg</imageUrl>
         <length>111</length>
         <price>16</price>
-        <screenings>1/2017-04-26-10-00</screenings>
-        <screenings>1/2017-04-26-12-30</screenings>
-        <screenings>3/2017-04-26-10-30</screenings>
-        <screenings>3/2017-04-26-13-00</screenings>
+        <screenings>1/2017-05-25-10-00</screenings>
+        <screenings>1/2017-05-25-12-30</screenings>
+        <screenings>3/2017-05-25-10-30</screenings>
+        <screenings>3/2017-05-25-13-00</screenings>
     </film>
     <film>
         <name>LA LA LAND</name>
         <imageUrl>images/la-la-land.jpg</imageUrl>
         <length>128</length>
         <price>16</price>
-        <screenings>2/2017-04-26-10-30</screenings>
-        <screenings>2/2017-04-26-13-00</screenings>
+        <screenings>2/2017-05-25-10-30</screenings>
+        <screenings>2/2017-05-25-13-00</screenings>
     </film>
 </cinema>

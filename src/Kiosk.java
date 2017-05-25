@@ -64,7 +64,20 @@ class Kiosk {
 	 */
 	private void welcome() {
 		kioskPanel.add(new GUIWelcome(this), "GUIWelcome");
+		showWelcome();
+	}
+
+	void showWelcome() {
 		kioskCardLayout.show(kioskPanel, "GUIWelcome");
+	}
+
+	void manage() {
+		kioskPanel.add(new GUIManage(this), "GUIManage");
+		showManage();
+	}
+
+	void showManage() {
+		kioskCardLayout.show(kioskPanel, "GUIManage");
 	}
 
 	/**

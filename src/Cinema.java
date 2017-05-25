@@ -7,6 +7,8 @@ import java.util.ArrayList;
 class Cinema {
 	static ArrayList<Film> films = new ArrayList<>();
 
+	static ArrayList<Ticket> tickets = new ArrayList<>();
+
 	static ArrayList<Film> getFilms() {
 		return films;
 	}

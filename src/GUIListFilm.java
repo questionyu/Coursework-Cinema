@@ -21,12 +21,6 @@ class GUIListFilm extends JPanel implements ActionListener {
 		super(new BorderLayout());
 		this.kiosk = kiosk;
 
-		Font buttonFont = kiosk.getButtonFont();
-
-		JButton exitButton = new JButton("Exit");
-		exitButton.setFont(buttonFont);
-		exitButton.addActionListener(e -> System.exit(0));
-
 		JPanel filmPosterPanel = new JPanel(new GridLayout(3, 2));
 		filmPosterPanel.setOpaque(false);
 
@@ -50,9 +44,9 @@ class GUIListFilm extends JPanel implements ActionListener {
 			filmPanel[i].setOpaque(false);
 			image[i].setImage(image[i].getImage().getScaledInstance(104, 156, Image.SCALE_DEFAULT));
 			label[i] = new JLabel(labelString[i], image[i], SwingConstants.LEFT);
-			label[i].setFont(buttonFont);
+			label[i].setFont(kiosk.getButtonFont());
 			numButton[i] = new JButton("BUY");
-			numButton[i].setFont(buttonFont);
+			numButton[i].setFont(kiosk.getButtonFont());
 			numButton[i].addMouseListener(new buyActionListener(i));
 			filmPanel[i].add(label[i], BorderLayout.WEST);
 			filmPanel[i].add(numButton[i], BorderLayout.EAST);
@@ -61,9 +55,18 @@ class GUIListFilm extends JPanel implements ActionListener {
 
 		JPanel listFilmSouthPanel = new JPanel();
 		listFilmSouthPanel.setLayout(new BoxLayout(listFilmSouthPanel, BoxLayout.X_AXIS));
-		listFilmSouthPanel.setOpaque(false);
+
+		JButton exitButton = new JButton("Exit");
+		exitButton.setFont(kiosk.getButtonFont());
+		exitButton.addActionListener(e -> System.exit(0));
+
+		JButton backButton = new JButton("Back");
+		backButton.setFont(kiosk.getButtonFont());
+		backButton.addActionListener(e -> kiosk.showWelcome());
 
 		listFilmSouthPanel.add(exitButton);
+		listFilmSouthPanel.add(Box.createHorizontalStrut(25));
+		listFilmSouthPanel.add(backButton);
 		listFilmSouthPanel.add(Box.createHorizontalGlue());
 
 		add(listFilmSouthPanel, BorderLayout.SOUTH);

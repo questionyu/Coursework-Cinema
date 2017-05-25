@@ -12,12 +12,16 @@ class GUIWelcome extends JPanel {
 		JLabel welcomeLabel = new JLabel("Welcome!", JLabel.CENTER);
 		welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 50));
 
-		JButton enterButton = new JButton("Enter");
-		enterButton.setFont(new Font("Segoe UI", Font.PLAIN, 30));
+		JButton manageButton = new JButton("Manage");
+		manageButton.setFont(kiosk.getButtonFont());
+		manageButton.addActionListener(e -> kiosk.manage());
+
+		JButton enterButton = new JButton("Buy");
+		enterButton.setFont(kiosk.getButtonFont());
 		enterButton.addActionListener(e -> kiosk.listFilm());
 
 		JPanel welcomeSouthPanel = new JPanel();
-		welcomeSouthPanel.setOpaque(false);
+		welcomeSouthPanel.add(manageButton);
 		welcomeSouthPanel.add(enterButton);
 
 		add(welcomeLabel, BorderLayout.CENTER);

@@ -29,7 +29,7 @@ class Kiosk {
 	 * This function creates a JFrame to contain a JPanel which uses CardLayout to display all things.
 	 */
 	private Kiosk() {
-		Cinema.films = getFilmFromFile();
+		CinemaController.films = getFilmFromFile();
 		try {
 			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
@@ -45,7 +45,7 @@ class Kiosk {
 
 		kioskCardLayout = new CardLayout();
 		kioskPanel = new JPanel(kioskCardLayout);
-		kioskFrame.add(kioskPanel);
+		kioskFrame.setContentPane(kioskPanel);
 
 		kioskFrame.setVisible(true);
 	}
@@ -96,7 +96,7 @@ class Kiosk {
 	}
 
 	void listScreening(int i) {
-		kioskPanel.add(new GUIListScreening(this, Cinema.getFilm(i)), "GUIListScreenings");
+		kioskPanel.add(new GUIListScreening(this, CinemaController.getFilm(i)), "GUIListScreenings");
 		showListScreening();
 	}
 
@@ -104,13 +104,25 @@ class Kiosk {
 		kioskCardLayout.show(kioskPanel, "GUIListScreenings");
 	}
 
-	void listSeat(Film film, int i) {
-		kioskPanel.add(new GUIListSeat(this, film, i), "GUIListSeat");
+	void listSeat(Film film, int screeningNo) {
+		kioskPanel.add(new GUIListSeat(this, film, screeningNo), "GUIListSeat");
+		CinemaController.selectedSeats = new ArrayList<>(); //Clear all selected seats.
 		showListSeat();
 	}
 
 	void showListSeat() {
 		kioskCardLayout.show(kioskPanel, "GUIListSeat");
+	}
+
+	void confirmTicket() {
+		CinemaController.orderTickets = new ArrayList<>();
+		CinemaController.addOrderTicket();
+		kioskPanel.add(new GUIConfirmTicket(this), "GUIConfirmTicket");
+		showConfirmTicket();
+	}
+
+	void showConfirmTicket() {
+		kioskCardLayout.show(kioskPanel, "GUIConfirmTicket");
 	}
 
 	/**
@@ -208,7 +220,7 @@ class Kiosk {
 	}
 
 	ArrayList<Film> getFilms() {
-		return Cinema.getFilms();
+		return CinemaController.getFilms();
 	}
 
 	Font getButtonFont() {

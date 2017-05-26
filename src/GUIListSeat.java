@@ -13,8 +13,6 @@ class GUIListSeat extends JPanel {
 	GUIListSeat(Kiosk kiosk, Film film, int screeningNo) {
 		super(new BorderLayout());
 
-		Font buttonFont = kiosk.getButtonFont();
-
 		String screening = film.getScreenings().get(screeningNo);
 		String[] screen = screening.split("/");
 		JPanel selectSeatPanel = new Screen(kiosk, film, screeningNo, Integer.parseInt(screen[0]));
@@ -23,19 +21,21 @@ class GUIListSeat extends JPanel {
 		listSeatSouthPanel.setLayout(new BoxLayout(listSeatSouthPanel, BoxLayout.X_AXIS));
 
 		JButton exitButton = new JButton("Exit");
-		exitButton.setFont(buttonFont);
+		exitButton.setFont(kiosk.getButtonFont());
 		exitButton.addActionListener(e -> System.exit(0));
-		listSeatSouthPanel.add(exitButton);
-		listSeatSouthPanel.add(Box.createHorizontalStrut(25));
 
 		JButton backButton = new JButton("Back");
 		backButton.setFont(kiosk.getButtonFont());
 		backButton.addActionListener(e -> kiosk.showListScreening());
-		listSeatSouthPanel.add(backButton);
-		listSeatSouthPanel.add(Box.createHorizontalGlue());
 
 		JButton confirmButton = new JButton("Confirm");
 		confirmButton.setFont(kiosk.getButtonFont());
+		confirmButton.addActionListener(e -> kiosk.confirmTicket());
+
+		listSeatSouthPanel.add(exitButton);
+		listSeatSouthPanel.add(Box.createHorizontalStrut(25));
+		listSeatSouthPanel.add(backButton);
+		listSeatSouthPanel.add(Box.createHorizontalGlue());
 		listSeatSouthPanel.add(confirmButton);
 
 		add(selectSeatPanel, BorderLayout.CENTER);
@@ -51,6 +51,7 @@ class Screen extends JPanel implements ActionListener {
 	private int[][] seats;
 	private int ticketType = Ticket.ADULT;
 	private Color currentColor = Ticket.ADULT_COLOR;
+//	private ArrayList<Seat> selectedSeats = new ArrayList<>();
 
 	Screen(Kiosk kiosk, Film film, int screeningNo, int screenNum) {
 		this.film = film;
@@ -108,7 +109,7 @@ class Screen extends JPanel implements ActionListener {
 			}
 			for (int aSeat : seat) {
 				if (aSeat == 1) {
-					JToggleButton seatButton = new JToggleButton("" + num);
+					Seat seatButton = new Seat("" + num, film, screeningNo);
 					seatButton.setFont(kiosk.getButtonFont());
 					seatButton.setActionCommand(cols[col - 1].getText() + num);
 					seatButton.addMouseListener(new mouseAdapter());
@@ -180,18 +181,6 @@ class Screen extends JPanel implements ActionListener {
 		add(seatAndNumber, BorderLayout.CENTER);
 	}
 
-	int getScreenNum() {
-		return screenNum;
-	}
-
-	String getMovieName() {
-		return movieName;
-	}
-
-	int[][] getSeats() {
-		return seats;
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
@@ -217,13 +206,19 @@ class Screen extends JPanel implements ActionListener {
 	class mouseAdapter extends MouseAdapter {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			JToggleButton toggleButton = (JToggleButton) e.getSource();
+			Seat toggleButton = (Seat) e.getSource();
 			if (toggleButton.isSelected()) {
 				toggleButton.setForeground(currentColor);
 				System.out.println(toggleButton.getActionCommand());
-				new Ticket(film, screeningNo, toggleButton.getActionCommand(), ticketType);
-			} else
+				CinemaController.selectedSeats.add(toggleButton);
+			} else {
 				toggleButton.setForeground(Color.BLACK);
+				String seat = toggleButton.getActionCommand();
+				for (Seat toggleButton1 : CinemaController.selectedSeats) {
+					if (toggleButton1.getActionCommand().equals(seat))
+						CinemaController.selectedSeats.remove(toggleButton1);
+				}
+			}
 		}
 	}
 }

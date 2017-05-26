@@ -19,7 +19,6 @@ class GUIListScreening extends JPanel {
 		super(new BorderLayout());
 		this.kiosk = kiosk;
 		this.film = film;
-		Font buttonFont = kiosk.getButtonFont();
 
 		JPanel listScreeningPanel = new JPanel();
 		listScreeningPanel.setLayout(new BoxLayout(listScreeningPanel, BoxLayout.Y_AXIS));
@@ -32,7 +31,7 @@ class GUIListScreening extends JPanel {
 			screenLabelPanel[i] = new JPanel();
 			screenLabelPanel[i].setBackground(Color.CYAN);
 			screenLabel[i] = new JLabel("Screen " + (i + 1));
-			screenLabel[i].setFont(buttonFont);
+			screenLabel[i].setFont(kiosk.getButtonFont());
 			screenLabel[i].setAlignmentX(screenLabelPanel[i].getAlignmentX());
 			screenLabelPanel[i].add(screenLabel[i]);
 			screen[i].add(screenLabelPanel[i], BorderLayout.NORTH);
@@ -55,7 +54,7 @@ class GUIListScreening extends JPanel {
 			Date now = new Date();
 			SimpleDateFormat ft = new SimpleDateFormat("HH:mm");
 			numButton[i] = new JButton(ft.format(date));
-			numButton[i].setFont(buttonFont);
+			numButton[i].setFont(kiosk.getButtonFont());
 			if (now.after(date))
 				numButton[i].setEnabled(false);
 			else
@@ -77,10 +76,11 @@ class GUIListScreening extends JPanel {
 		listScreeningSouthPanel.setLayout(new BoxLayout(listScreeningSouthPanel, BoxLayout.X_AXIS));
 
 		JButton exitButton = new JButton("Exit");
-		exitButton.setFont(buttonFont);
+		exitButton.setFont(kiosk.getButtonFont());
 		exitButton.addActionListener(e -> System.exit(0));
+
 		JButton backButton = new JButton("Back");
-		backButton.setFont(buttonFont);
+		backButton.setFont(kiosk.getButtonFont());
 		backButton.addActionListener(e -> kiosk.showListFilm());
 
 		listScreeningSouthPanel.add(exitButton);
@@ -90,6 +90,7 @@ class GUIListScreening extends JPanel {
 
 		ImageIcon image = film.getImage();
 		image.setImage(image.getImage().getScaledInstance(330, 470, Image.SCALE_DEFAULT));
+
 		add(new JLabel(image), BorderLayout.WEST);
 		add(listScreeningPanel, BorderLayout.CENTER);
 		add(listScreeningSouthPanel, BorderLayout.SOUTH);

@@ -15,30 +15,29 @@ class Ticket {
 	static final Color SENIOR_COLOR = Color.BLUE;
 	static final Color STUDENT_COLOR = Color.PINK;
 
-	private static final double ADULT_DISCOUNT = 0.5;
-	private static final double CHILD_DISCOUNT = 0;
+	private static final double ADULT_DISCOUNT = 0.0;
+	private static final double CHILD_DISCOUNT = 0.5;
 	private static final double SENIOR_DISCOUNT = 0.2;
 	private static final double STUDENT_DISCOUNT = 0.15;
 
 	private static final int TICKET_NUMBER_LENGTH = 8;
 
 	private Film film;
-	private int screeningNo;
+	private int screen;
+	private String time;
 	private String seat;
-	private int ticketNum;
-	private int ticketType;
+	private int num;
+	private int type;
 	private double discount;
+	private double price;
+	private double finalPrice;
 
-	private String seatNum;
-	private String movieName;
-
-	Ticket(Film film, int screeningNo, String seat, int ticketType) {
+	Ticket(Film film, int screeningNo, String seat, int type) {
 		this.film = film;
-		this.screeningNo = screeningNo;
 		this.seat = seat;
-		this.ticketType = ticketType;
+		this.type = type;
 		generateRandomNum();
-		switch (ticketType) {
+		switch (type) {
 			case ADULT:
 				this.discount = ADULT_DISCOUNT;
 				break;
@@ -52,6 +51,11 @@ class Ticket {
 				this.discount = STUDENT_DISCOUNT;
 				break;
 		}
+		price = film.getPrice();
+		finalPrice = price * (1 - discount);
+		String[] screenAndTime = film.getScreenings().get(screeningNo).split("/");
+		screen = Integer.parseInt(screenAndTime[0]);
+		time = screenAndTime[1];
 	}
 
 	void generateRandomNum() {
@@ -59,7 +63,7 @@ class Ticket {
 		for (int i = 0; i < TICKET_NUMBER_LENGTH; i++) {
 			ticketNo.append((int) (1 + Math.random() * 4));
 		}
-		ticketNum = Integer.parseInt(ticketNo.toString());
+		num = Integer.parseInt(ticketNo.toString());
 	}
 
 	/**
@@ -67,8 +71,8 @@ class Ticket {
 	 *
 	 * @return Ticket number.
 	 */
-	int getTicketNum() {
-		return ticketNum;
+	int getNum() {
+		return num;
 	}
 
 	/**
@@ -76,8 +80,8 @@ class Ticket {
 	 *
 	 * @return A string variable which save the type of ticket.
 	 */
-	String getTicketType() {
-		switch (ticketType) {
+	String getType() {
+		switch (type) {
 			case 0:
 				return "Adult";
 			case 1:
@@ -88,5 +92,40 @@ class Ticket {
 				return "Student";
 		}
 		return null;
+	}
+
+	double getPrice() {
+		return price;
+	}
+
+	double getFinalPrice() {
+		return finalPrice;
+	}
+
+	String getFilmName() {
+		return film.getName();
+	}
+
+	int getScreen() {
+		return screen;
+	}
+
+	String getTime() {
+		return time;
+	}
+
+	String getSeat() {
+		return seat;
+	}
+
+	@Override
+	public String toString() {
+		return "Ticket\n" +
+				"Film: " + film.getName() + "\n" +
+				"Time: " + time + "\n" +
+				"Screen: " + screen + "\n" +
+				"Seat: " + seat + "\n" +
+				"Ticket type: " + this.getType() + "\n" +
+				"Ticket ID: " + num + "\n";
 	}
 }

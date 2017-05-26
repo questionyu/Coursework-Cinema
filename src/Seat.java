@@ -4,18 +4,35 @@ import javax.swing.*;
  * Title        Seat.java
  * Description
  */
-class Seat extends JButton {
-	private int column;
-	private String row;
-	private String seatNum;
+class Seat extends JToggleButton {
+	private Film film;
+	private int screeningNo;
+	private String seat;
+	private int ticketType;
 
-	Seat(int column, String row) {
-		this.column = column;
-		this.row = row;
-		seatNum = row + column;
+	Seat(String text, Film film, int screeningNo) {
+		super(text);
+		this.film = film;
+		this.screeningNo = screeningNo;
 	}
 
-	String getSeatNum() {
-		return seatNum;
+	int getTicketType() {
+		return ticketType;
+	}
+
+	void setTicketType(int type) {
+		this.ticketType = type;
+	}
+
+	Film getFilm() {
+		return film;
+	}
+
+	int getScreeningNo() {
+		return screeningNo;
+	}
+
+	String getSeat() {
+		return seat;
 	}
 }

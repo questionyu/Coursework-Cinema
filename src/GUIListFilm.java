@@ -16,6 +16,8 @@ class GUIListFilm extends JPanel implements ActionListener {
 
 	/**
 	 * Constructor.
+	 *
+	 * @param kiosk The kiosk instance.
 	 */
 	GUIListFilm(Kiosk kiosk) {
 		super(new BorderLayout());
@@ -47,7 +49,7 @@ class GUIListFilm extends JPanel implements ActionListener {
 			label[i].setFont(kiosk.getButtonFont());
 			numButton[i] = new JButton("BUY");
 			numButton[i].setFont(kiosk.getButtonFont());
-			numButton[i].addMouseListener(new buyActionListener(i));
+			numButton[i].addMouseListener(new mouseAdapter(i));
 			filmPanel[i].add(label[i], BorderLayout.WEST);
 			filmPanel[i].add(numButton[i], BorderLayout.EAST);
 			filmPosterPanel.add(filmPanel[i]);
@@ -84,10 +86,10 @@ class GUIListFilm extends JPanel implements ActionListener {
 		}
 	}
 
-	class buyActionListener extends MouseAdapter {
+	class mouseAdapter extends MouseAdapter {
 		int i;
 
-		buyActionListener(int i) {
+		mouseAdapter(int i) {
 			this.i = i;
 		}
 

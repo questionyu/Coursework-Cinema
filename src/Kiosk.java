@@ -211,8 +211,8 @@ class Kiosk {
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
 			StreamResult result = new StreamResult(new File("films.xml"));
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");//增加换行缩进，但此时缩进默认为0
-			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");//设置缩进为4
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 			transformer.transform(source, result);
 		} catch (Exception e) {
 			e.printStackTrace();

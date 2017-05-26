@@ -23,6 +23,7 @@ class Ticket {
 	private static final int TICKET_NUMBER_LENGTH = 8;
 
 	private Film film;
+	private String screening;
 	private int screen;
 	private String time;
 	private String seat;
@@ -53,7 +54,8 @@ class Ticket {
 		}
 		price = film.getPrice();
 		finalPrice = price * (1 - discount);
-		String[] screenAndTime = film.getScreenings().get(screeningNo).split("/");
+		screening = film.getScreenings().get(screeningNo);
+		String[] screenAndTime = screening.split("/");
 		screen = Integer.parseInt(screenAndTime[0]);
 		time = screenAndTime[1];
 	}
@@ -104,6 +106,10 @@ class Ticket {
 
 	String getFilmName() {
 		return film.getName();
+	}
+
+	String getScreening() {
+		return screening;
 	}
 
 	int getScreen() {

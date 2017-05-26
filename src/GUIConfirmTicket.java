@@ -36,9 +36,9 @@ class GUIConfirmTicket extends JPanel {
 
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font(null, Font.PLAIN, 15));
-//		FitTableColumns(table);
 		JScrollPane scrollPane = new JScrollPane(table);
 		JLabel totalPriceLabel = new JLabel("Total Price: Original: " + CinemaController.orderTicketTotalPrice() + " After discount: " + CinemaController.orderTicketTotalFinalPrice(), JLabel.CENTER);
+		totalPriceLabel.setFont(kiosk.getButtonFont());
 
 		JPanel ticketInformationPanel = new JPanel(new BorderLayout());
 		ticketInformationPanel.add(scrollPane, BorderLayout.CENTER);
@@ -57,7 +57,12 @@ class GUIConfirmTicket extends JPanel {
 
 		JButton payButton = new JButton("Pay");
 		payButton.setFont(kiosk.getButtonFont());
-//		payButton.addActionListener();
+		JLabel paySuccess = new JLabel("Successful!", JLabel.CENTER);
+		paySuccess.setFont(kiosk.getButtonFont());
+		payButton.addActionListener(e -> {
+			JOptionPane.showMessageDialog(null, paySuccess, "Pay", JOptionPane.INFORMATION_MESSAGE);
+			kiosk.showListFilm();
+		});
 
 		confirmTicketSouthPanel.add(exitButton);
 		confirmTicketSouthPanel.add(Box.createHorizontalStrut(25));

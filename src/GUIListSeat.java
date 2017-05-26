@@ -209,6 +209,7 @@ class Screen extends JPanel implements ActionListener {
 			Seat toggleButton = (Seat) e.getSource();
 			if (toggleButton.isSelected()) {
 				toggleButton.setForeground(currentColor);
+				toggleButton.setTicketType(ticketType);
 				System.out.println(toggleButton.getActionCommand());
 				CinemaController.selectedSeats.add(toggleButton);
 			} else {

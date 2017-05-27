@@ -37,8 +37,9 @@ class GUIConfirmTicket extends JPanel {
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font(null, Font.PLAIN, 15));
 		JScrollPane scrollPane = new JScrollPane(table);
+
 		JLabel totalPriceLabel = new JLabel("Total Price: Original: " + KioskController.orderTicketTotalPrice() + " After discount: " + KioskController.orderTicketTotalFinalPrice(), JLabel.CENTER);
-		totalPriceLabel.setFont(Kiosk.getButtonFont());
+		totalPriceLabel.setFont(Kiosk.getUIMainFont());
 
 		JPanel ticketInformationPanel = new JPanel(new BorderLayout());
 		ticketInformationPanel.add(scrollPane, BorderLayout.CENTER);
@@ -48,17 +49,17 @@ class GUIConfirmTicket extends JPanel {
 		confirmTicketSouthPanel.setLayout(new BoxLayout(confirmTicketSouthPanel, BoxLayout.X_AXIS));
 
 		JButton exitButton = new JButton("Exit");
-		exitButton.setFont(Kiosk.getButtonFont());
+		exitButton.setFont(Kiosk.getUIMainFont());
 		exitButton.addActionListener(e -> System.exit(0));
 
 		JButton backButton = new JButton("Back");
-		backButton.setFont(Kiosk.getButtonFont());
+		backButton.setFont(Kiosk.getUIMainFont());
 		backButton.addActionListener(e -> Kiosk.showListSeat());
 
 		JButton payButton = new JButton("Pay");
-		payButton.setFont(Kiosk.getButtonFont());
+		payButton.setFont(Kiosk.getUIMainFont());
 		JLabel paySuccess = new JLabel("Successful!", JLabel.CENTER);
-		paySuccess.setFont(Kiosk.getButtonFont());
+		paySuccess.setFont(Kiosk.getUIMainFont());
 		payButton.addActionListener(e -> {
 			KioskController.payAndPrint();
 			JOptionPane.showMessageDialog(null, paySuccess, "Pay", JOptionPane.INFORMATION_MESSAGE);

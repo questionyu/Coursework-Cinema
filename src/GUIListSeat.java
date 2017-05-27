@@ -27,15 +27,15 @@ class GUIListSeat extends JPanel implements ActionListener {
 
 		JLabel[] cols = new JLabel[5];
 		cols[0] = new JLabel("A", JLabel.CENTER);
-		cols[0].setFont(Kiosk.getButtonFont());
+		cols[0].setFont(Kiosk.getUIMainFont());
 		cols[1] = new JLabel("B", JLabel.CENTER);
-		cols[1].setFont(Kiosk.getButtonFont());
+		cols[1].setFont(Kiosk.getUIMainFont());
 		cols[2] = new JLabel("C", JLabel.CENTER);
-		cols[2].setFont(Kiosk.getButtonFont());
+		cols[2].setFont(Kiosk.getUIMainFont());
 		cols[3] = new JLabel("D", JLabel.CENTER);
-		cols[3].setFont(Kiosk.getButtonFont());
+		cols[3].setFont(Kiosk.getUIMainFont());
 		cols[4] = new JLabel("E", JLabel.CENTER);
-		cols[4].setFont(Kiosk.getButtonFont());
+		cols[4].setFont(Kiosk.getUIMainFont());
 
 		int[][] seats = new int[][]{};
 		switch (Integer.parseInt(screen[0])) {
@@ -74,7 +74,7 @@ class GUIListSeat extends JPanel implements ActionListener {
 			for (int aSeat : seat) {
 				if (aSeat == 1) {
 					Seat seatButton = new Seat("" + num, film, screening);
-					seatButton.setFont(Kiosk.getButtonFont());
+					seatButton.setFont(Kiosk.getUIMainFont());
 					seatButton.setSeat(cols[col - 1].getText() + num);
 
 					if (KioskController.checkSold(seatButton))
@@ -96,7 +96,7 @@ class GUIListSeat extends JPanel implements ActionListener {
 
 		JPanel screenLabelPanel = new JPanel();
 		JLabel screenLabel = new JLabel("Screen");
-		screenLabel.setFont(Kiosk.getButtonFont());
+		screenLabel.setFont(Kiosk.getUIMainFont());
 		screenLabelPanel.setBackground(Color.CYAN);
 		screenLabelPanel.add(screenLabel);
 
@@ -106,23 +106,23 @@ class GUIListSeat extends JPanel implements ActionListener {
 
 		//Radio buttons. To select a ticket type.
 		JRadioButton adult = new JRadioButton("Adult");
-		adult.setFont(Kiosk.getButtonFont());
+		adult.setFont(Kiosk.getUIMainFont());
 		adult.setForeground(Ticket.ADULT_COLOR);
 		adult.setActionCommand("Adult");
 		adult.setSelected(true);
 
 		JRadioButton child = new JRadioButton("Child");
-		child.setFont(Kiosk.getButtonFont());
+		child.setFont(Kiosk.getUIMainFont());
 		child.setForeground(Ticket.CHILD_COLOR);
 		child.setActionCommand("Child");
 
 		JRadioButton senior = new JRadioButton("Senior");
-		senior.setFont(Kiosk.getButtonFont());
+		senior.setFont(Kiosk.getUIMainFont());
 		senior.setForeground(Ticket.SENIOR_COLOR);
 		senior.setActionCommand("Senior");
 
 		JRadioButton student = new JRadioButton("Student");
-		student.setFont(Kiosk.getButtonFont());
+		student.setFont(Kiosk.getUIMainFont());
 		student.setForeground(Ticket.STUDENT_COLOR);
 		student.setActionCommand("Student");
 
@@ -153,15 +153,15 @@ class GUIListSeat extends JPanel implements ActionListener {
 		listSeatSouthPanel.setLayout(new BoxLayout(listSeatSouthPanel, BoxLayout.X_AXIS));
 
 		JButton exitButton = new JButton("Exit");
-		exitButton.setFont(Kiosk.getButtonFont());
+		exitButton.setFont(Kiosk.getUIMainFont());
 		exitButton.addActionListener(e -> System.exit(0));
 
 		JButton backButton = new JButton("Back");
-		backButton.setFont(Kiosk.getButtonFont());
+		backButton.setFont(Kiosk.getUIMainFont());
 		backButton.addActionListener(e -> Kiosk.showListScreening());
 
 		confirmButton = new JButton("Confirm");
-		confirmButton.setFont(Kiosk.getButtonFont());
+		confirmButton.setFont(Kiosk.getUIMainFont());
 		confirmButton.addActionListener(e -> Kiosk.confirmTicket());
 		confirmButton.setEnabled(false);
 

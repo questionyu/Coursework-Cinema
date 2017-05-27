@@ -9,7 +9,7 @@ import java.util.ArrayList;
 class Kiosk extends JFrame {
 	private static CardLayout kioskCardLayout;
 	private static JPanel kioskPanel;
-	private static Font buttonFont;
+	private static Font UIMainFont;
 
 	/**
 	 * Constructor function of Kiosk.
@@ -34,7 +34,7 @@ class Kiosk extends JFrame {
 
 		this.setContentPane(kioskPanel);
 
-		buttonFont = new Font("Segoe UI", Font.PLAIN, 25);
+		UIMainFont = new Font("Segoe UI", Font.PLAIN, 25);
 
 		this.setVisible(true);
 	}
@@ -121,7 +121,7 @@ class Kiosk extends JFrame {
 		kioskCardLayout.show(kioskPanel, "GUIConfirmTicket");
 	}
 
-	static Font getButtonFont() {
-		return buttonFont;
+	static Font getUIMainFont() {
+		return UIMainFont;
 	}
 }

@@ -13,11 +13,11 @@ class GUIWelcome extends JPanel {
 		welcomeLabel.setFont(new Font("Segoe UI", Font.BOLD, 50));
 
 		JButton manageButton = new JButton("Report");
-		manageButton.setFont(Kiosk.getButtonFont());
+		manageButton.setFont(Kiosk.getUIMainFont());
 		manageButton.addActionListener(e -> Kiosk.report());
 
 		JButton enterButton = new JButton("Buy");
-		enterButton.setFont(Kiosk.getButtonFont());
+		enterButton.setFont(Kiosk.getUIMainFont());
 		enterButton.addActionListener(e -> Kiosk.listFilm());
 
 		JPanel welcomeSouthPanel = new JPanel();

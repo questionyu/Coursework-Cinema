@@ -40,9 +40,9 @@ class GUIListFilm extends JPanel {
 			filmPanel[i].setOpaque(false);
 			image[i].setImage(image[i].getImage().getScaledInstance(104, 156, Image.SCALE_DEFAULT));
 			label[i] = new JLabel(labelString[i], image[i], SwingConstants.LEFT);
-			label[i].setFont(Kiosk.getButtonFont());
+			label[i].setFont(Kiosk.getUIMainFont());
 			numButton[i] = new JButton("BUY");
-			numButton[i].setFont(Kiosk.getButtonFont());
+			numButton[i].setFont(Kiosk.getUIMainFont());
 			numButton[i].addMouseListener(new mouseAdapter(i));
 			filmPanel[i].add(label[i], BorderLayout.WEST);
 			filmPanel[i].add(numButton[i], BorderLayout.EAST);
@@ -53,11 +53,11 @@ class GUIListFilm extends JPanel {
 		listFilmSouthPanel.setLayout(new BoxLayout(listFilmSouthPanel, BoxLayout.X_AXIS));
 
 		JButton exitButton = new JButton("Exit");
-		exitButton.setFont(Kiosk.getButtonFont());
+		exitButton.setFont(Kiosk.getUIMainFont());
 		exitButton.addActionListener(e -> System.exit(0));
 
 		JButton backButton = new JButton("Back");
-		backButton.setFont(Kiosk.getButtonFont());
+		backButton.setFont(Kiosk.getUIMainFont());
 		backButton.addActionListener(e -> Kiosk.showWelcome());
 
 		listFilmSouthPanel.add(exitButton);

@@ -13,24 +13,47 @@ class GUIReport extends JPanel {
 		reportPanel.setLayout(new BoxLayout(reportPanel, BoxLayout.Y_AXIS));
 
 		//the total sale of each film
-		double[] totalOfEachFilm = new double[KioskController.films.size()];
-		JLabel[] totalOfEachFilmLabel = new JLabel[KioskController.films.size()];
-		for (int i = 0; i < totalOfEachFilm.length; i++) {
-			totalOfEachFilm[i] = 0.0;
+		JLabel label1 = new JLabel("The total sale of each film:", JLabel.CENTER);
+		label1.setFont(Kiosk.getUIMainFont());
+		JPanel panel1 = new JPanel();
+		panel1.setBackground(Color.CYAN);
+		panel1.add(label1);
+		reportPanel.add(panel1);
+
+		String[] columnNames1 = {"Film", "Amount", "Total Sale"};
+		String[][] data1 = new String[KioskController.films.size()][];
+		for (int i = 0; i < data1.length; i++) {
 			Film film = KioskController.films.get(i);
+			double total = 0.0;
+			int amount = 0;
 			for (Ticket ticket : KioskController.tickets) {
-				if (film.equals(ticket.getFilm()))
-					totalOfEachFilm[i] += ticket.getFinalPrice();
+				if (film.equals(ticket.getFilm())) {
+					total += ticket.getFinalPrice();
+					amount++;
+				}
 			}
-			totalOfEachFilmLabel[i] = new JLabel(film.getName() + ": " + totalOfEachFilm[i], JLabel.CENTER);
-			totalOfEachFilmLabel[i].setFont(Kiosk.getButtonFont());
+			data1[i] = new String[]{film.getName(), "" + amount, "" + total};
 		}
+
+		JTable table1 = new JTable(data1, columnNames1);
+		table1.setFont(new Font(null, Font.PLAIN, 15));
+		JScrollPane scrollPane1 = new JScrollPane(table1);
+
+		reportPanel.add(scrollPane1);
 
 		//total number of tickets sold
 		JLabel totalNumberOfTickets = new JLabel("Total number of tickets sold: " + KioskController.tickets.size(), JLabel.CENTER);
-		totalNumberOfTickets.setFont(Kiosk.getButtonFont());
+		totalNumberOfTickets.setFont(Kiosk.getUIMainFont());
+		reportPanel.add(totalNumberOfTickets);
 
 		//each type of ticket sold
+		JLabel label3 = new JLabel("Each type of ticket sold", JLabel.CENTER);
+		label3.setFont(Kiosk.getUIMainFont());
+		JPanel panel3 = new JPanel();
+		panel3.setBackground(Color.CYAN);
+		panel3.add(label3);
+		reportPanel.add(panel3);
+
 		int[] amount = new int[]{0, 0, 0, 0};
 		for (Ticket ticket : KioskController.tickets) {
 			switch (ticket.getType()) {
@@ -48,37 +71,25 @@ class GUIReport extends JPanel {
 					break;
 			}
 		}
-		JLabel eachType = new JLabel("Adult: " + amount[0] + " Child: " + amount[1] + " Senior: " + amount[2] + " Student: " + amount[3], JLabel.CENTER);
-		eachType.setFont(Kiosk.getButtonFont());
 
-		JLabel label1 = new JLabel("The total sale of each film:", JLabel.CENTER);
-		label1.setFont(Kiosk.getButtonFont());
-		JPanel panel1 = new JPanel();
-		panel1.setBackground(Color.CYAN);
-		panel1.add(label1);
-		reportPanel.add(panel1);
-		for (JLabel label : totalOfEachFilmLabel)
-			reportPanel.add(label);
+		String[] columnNames3 = {"Adult", "Child", "Senior", "Student"};
+		String[][] data3 = {{"" + amount[0], "" + amount[1], "" + amount[2], "" + amount[3]}};
 
-		reportPanel.add(totalNumberOfTickets);
+		JTable table3 = new JTable(data3, columnNames3);
+		table3.setFont(new Font(null, Font.PLAIN, 15));
+		JScrollPane scrollPane3 = new JScrollPane(table3);
 
-		JLabel label3 = new JLabel("Each type of ticket sold", JLabel.CENTER);
-		label3.setFont(Kiosk.getButtonFont());
-		JPanel panel3 = new JPanel();
-		panel3.setBackground(Color.CYAN);
-		panel3.add(label3);
-		reportPanel.add(panel3);
-		reportPanel.add(eachType);
+		reportPanel.add(scrollPane3);
 
 		JPanel reportSouthPanel = new JPanel();
 		reportSouthPanel.setLayout(new BoxLayout(reportSouthPanel, BoxLayout.X_AXIS));
 
 		JButton exitButton = new JButton("Exit");
-		exitButton.setFont(Kiosk.getButtonFont());
+		exitButton.setFont(Kiosk.getUIMainFont());
 		exitButton.addActionListener(e -> System.exit(0));
 
 		JButton backButton = new JButton("Back");
-		backButton.setFont(Kiosk.getButtonFont());
+		backButton.setFont(Kiosk.getUIMainFont());
 		backButton.addActionListener(e -> Kiosk.showWelcome());
 
 		reportSouthPanel.add(exitButton);

@@ -21,26 +21,57 @@ import java.util.ArrayList;
  * Description  This class controls the kiosk.
  */
 class KioskController {
+	/**
+	 * All the kiosk's films.
+	 */
 	static ArrayList<Film> films;
 
+	/**
+	 * All sold tickets.
+	 */
 	static ArrayList<Ticket> tickets = new ArrayList<>();
 
+	/**
+	 * All ordered tickets. But not paid.
+	 */
 	static ArrayList<Ticket> orderTickets = new ArrayList<>();
 
+	/**
+	 * All selected seats. But not paid.
+	 */
 	static ArrayList<Seat> selectedSeats = new ArrayList<>();
 
+	/**
+	 * A private blank constructor. Prevent other class creating a instance of KioskController.
+	 */
 	private KioskController() {
 	}
 
+	/**
+	 * This function loads films.
+	 *
+	 * @return True for loading successfully, false for failed.
+	 */
 	static boolean loadFilms() {
 		films = getFilmFromFile();
 		return films != null;
 	}
 
+	/**
+	 * This function can save films to file.
+	 *
+	 * @return True for saving successfully, false for failed.
+	 */
 	static boolean saveFilms() {
 		return writeFilmToFile(films);
 	}
 
+	/**
+	 * This function checks if new ticket's number is duplicated.
+	 *
+	 * @param newTicket The ticket which would be checked.
+	 * @return True for duplicated, false for not.
+	 */
 	private static boolean checkDuplicated(Ticket newTicket) {
 		for (Ticket ticket : tickets)
 			if (ticket.getNum() == newTicket.getNum())
@@ -51,6 +82,9 @@ class KioskController {
 		return false;
 	}
 
+	/**
+	 * This function converts selected seats to ordered tickets.
+	 */
 	static void addOrderTicket() {
 		for (Seat seat : selectedSeats) {
 			Ticket newOrderTicket = new Ticket(seat.getFilm(), seat.getScreening(), seat.getSeat(), seat.getTicketType());
@@ -61,6 +95,11 @@ class KioskController {
 		}
 	}
 
+	/**
+	 * This function calculates the original total price of tickets.
+	 *
+	 * @return The original total price of tickets.
+	 */
 	static double orderTicketTotalPrice() {
 		double totalPrice = 0.0;
 		for (Ticket ticket : orderTickets) {
@@ -69,6 +108,11 @@ class KioskController {
 		return totalPrice;
 	}
 
+	/**
+	 * This function calculates the total price of tickets after discount.
+	 *
+	 * @return The total price of tickets after discount.
+	 */
 	static double orderTicketTotalFinalPrice() {
 		double totalFinalPrice = 0.0;
 		for (Ticket ticket : orderTickets) {
@@ -77,6 +121,9 @@ class KioskController {
 		return totalFinalPrice;
 	}
 
+	/**
+	 * This function prints all tickets to txt files. And transfer ordered tickets to tickets.
+	 */
 	static void payAndPrint() {
 		//Export to txt files.
 		for (Ticket ticket : orderTickets) {
@@ -94,6 +141,12 @@ class KioskController {
 		orderTickets = new ArrayList<>();
 	}
 
+	/**
+	 * This function checks if the seat was sold.
+	 *
+	 * @param seat The seat which would be checked.
+	 * @return True for sold, false for not.
+	 */
 	static boolean checkSold(Seat seat) {
 		for (Ticket ticket : tickets) {
 			if (ticket.getScreening().equals(seat.getScreening()))
@@ -103,14 +156,28 @@ class KioskController {
 		return false;
 	}
 
+	/**
+	 * Getter function of films.
+	 *
+	 * @return All films of kiosk.
+	 */
 	static ArrayList<Film> getFilms() {
 		return films;
 	}
 
+	/**
+	 * Getter function of film.
+	 *
+	 * @param i The film no.
+	 * @return The selected film.
+	 */
 	static Film getFilm(int i) {
 		return films.get(i);
 	}
 
+	/**
+	 * This function pretends to send an email.
+	 */
 	static void sendMail() {
 		JLabel sendMailSuccessful = new JLabel("Send mail successfully!", JLabel.CENTER);
 		sendMailSuccessful.setFont(Kiosk.getUIMainFont());

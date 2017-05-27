@@ -6,6 +6,9 @@ import java.awt.*;
  * Description  This class defines the UI of report.
  */
 class GUIReport extends JPanel {
+	/**
+	 * Constructor function. Create a panel which shows the report of kiosk.
+	 */
 	GUIReport() {
 		super(new BorderLayout());
 

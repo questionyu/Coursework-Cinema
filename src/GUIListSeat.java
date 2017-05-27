@@ -6,14 +6,31 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Title
- * Description
+ * Title        GUIListSeat.java
+ * Description  This class list all seats.
  */
 class GUIListSeat extends JPanel implements ActionListener {
+	/**
+	 * The seat type.
+	 */
 	private int ticketType = Ticket.ADULT;
+
+	/**
+	 * The default color of seat.
+	 */
 	private Color currentColor = Ticket.ADULT_COLOR;
+
+	/**
+	 * The confirm button.
+	 */
 	private JButton confirmButton;
 
+	/**
+	 * Constructor function. Create a panel which shows the seats of screening.
+	 *
+	 * @param film      The film of current screening.
+	 * @param screening The current screening.
+	 */
 	GUIListSeat(Film film, String screening) {
 		super(new BorderLayout());
 
@@ -175,6 +192,9 @@ class GUIListSeat extends JPanel implements ActionListener {
 		add(listSeatSouthPanel, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
@@ -198,6 +218,9 @@ class GUIListSeat extends JPanel implements ActionListener {
 	}
 
 	class mouseAdapter extends MouseAdapter {
+		/**
+		 * {@inheritDoc}
+		 */
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			Seat seatButton = (Seat) e.getSource();

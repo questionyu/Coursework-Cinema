@@ -4,12 +4,16 @@ import java.util.ArrayList;
 
 /**
  * Title        GUIConfirmTicket.java
- * Description  description...
+ * Description  This class defines the UI of confirm tickets.
  */
 class GUIConfirmTicket extends JPanel {
+	/**
+	 * Constructor function. Create a panel which show all ordered tickets.
+	 */
 	GUIConfirmTicket() {
 		super(new BorderLayout());
 
+		//Create a table which contains all ordered tickets's information.
 		String[] columnNames = {
 				"Film",
 				"Time",
@@ -45,6 +49,7 @@ class GUIConfirmTicket extends JPanel {
 		ticketInformationPanel.add(scrollPane, BorderLayout.CENTER);
 		ticketInformationPanel.add(totalPriceLabel, BorderLayout.SOUTH);
 
+		//South panel which contains three buttons.
 		JPanel confirmTicketSouthPanel = new JPanel();
 		confirmTicketSouthPanel.setLayout(new BoxLayout(confirmTicketSouthPanel, BoxLayout.X_AXIS));
 

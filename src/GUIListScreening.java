@@ -43,11 +43,7 @@ class GUIListScreening extends JPanel {
 				System.out.println("screening information wrong!" + screening);
 			}
 			Date now = new Date();
-			if (now.getYear() != date.getYear())
-				continue;
-			else if (now.getMonth() != date.getMonth())
-				continue;
-			else if (now.getDay() != date.getDay())
+			if (!(now.getYear() == date.getYear() && now.getMonth() == date.getMonth() && now.getDay() == date.getDay()))
 				continue;
 
 			SimpleDateFormat ft = new SimpleDateFormat("HH:mm");

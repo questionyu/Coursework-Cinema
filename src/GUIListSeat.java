@@ -75,7 +75,12 @@ class GUIListSeat extends JPanel implements ActionListener {
 					Seat seatButton = new Seat("" + num, film, screening);
 					seatButton.setFont(kiosk.getButtonFont());
 					seatButton.setSeat(cols[col - 1].getText() + num);
-					seatButton.addMouseListener(new mouseAdapter());
+
+					if (KioskController.checkSold(seatButton))
+						seatButton.setEnabled(false);
+					else
+						seatButton.addMouseListener(new mouseAdapter());
+
 					seatPanel.add(seatButton);
 					num--;
 				} else {

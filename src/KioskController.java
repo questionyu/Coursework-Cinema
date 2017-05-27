@@ -58,6 +58,15 @@ class KioskController {
 		orderTickets = new ArrayList<>();
 	}
 
+	static boolean checkSold(Seat seat) {
+		for (Ticket ticket : tickets) {
+			if (ticket.getScreening().equals(seat.getScreening()))
+				if (ticket.getSeat().equals(seat.getSeat()))
+					return true;
+		}
+		return false;
+	}
+
 	static ArrayList<Film> getFilms() {
 		return films;
 	}

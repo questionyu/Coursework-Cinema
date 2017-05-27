@@ -92,10 +92,15 @@ class GUIReport extends JPanel {
 		backButton.setFont(Kiosk.getUIMainFont());
 		backButton.addActionListener(e -> Kiosk.showWelcome());
 
+		JButton sendMailButton = new JButton("Send Mail");
+		sendMailButton.setFont(Kiosk.getUIMainFont());
+		sendMailButton.addActionListener(e -> KioskController.sendMail());
+
 		reportSouthPanel.add(exitButton);
 		reportSouthPanel.add(Box.createHorizontalStrut(25));
 		reportSouthPanel.add(backButton);
 		reportSouthPanel.add(Box.createHorizontalGlue());
+		reportSouthPanel.add(sendMailButton);
 
 		add(reportPanel, BorderLayout.CENTER);
 		add(reportSouthPanel, BorderLayout.SOUTH);

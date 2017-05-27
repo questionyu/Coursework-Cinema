@@ -3,6 +3,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -108,6 +109,12 @@ class KioskController {
 
 	static Film getFilm(int i) {
 		return films.get(i);
+	}
+
+	static void sendMail() {
+		JLabel sendMailSuccessful = new JLabel("Send mail successfully!", JLabel.CENTER);
+		sendMailSuccessful.setFont(Kiosk.getUIMainFont());
+		JOptionPane.showMessageDialog(null, sendMailSuccessful, "Send Mail", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**

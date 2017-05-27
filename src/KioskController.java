@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -54,6 +56,17 @@ class KioskController {
 
 	static void payAndPrint() {
 		//Export to txt files.
+		for (Ticket ticket : orderTickets) {
+			try {
+				FileWriter fileWriter = new FileWriter("tickets/" + ticket.getNum() + ".txt");
+
+				fileWriter.write(ticket.toString());
+
+				fileWriter.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		tickets.addAll(orderTickets);
 		orderTickets = new ArrayList<>();
 	}

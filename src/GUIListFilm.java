@@ -23,7 +23,7 @@ class GUIListFilm extends JPanel implements ActionListener {
 		super(new BorderLayout());
 		this.kiosk = kiosk;
 
-		JPanel filmPosterPanel = new JPanel(new GridLayout(3, 2));
+		JPanel filmPosterPanel = new JPanel(new GridLayout(3, 2, 5, 5));
 		filmPosterPanel.setOpaque(false);
 
 		ArrayList<Film> films = kiosk.getFilms();

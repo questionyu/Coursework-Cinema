@@ -10,6 +10,12 @@ import java.util.Date;
  * Description  This class list all screenings of one movie.
  */
 class GUIListScreening extends JPanel {
+	/**
+	 * Constructor function.
+	 *
+	 * @param kiosk The instance of Kiosk.
+	 * @param film  The selected film.
+	 */
 	GUIListScreening(Kiosk kiosk, Film film) {
 		super(new BorderLayout());
 

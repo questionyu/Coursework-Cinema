@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Title        .java
  * Description  This class defines a cinema.
  */
-class CinemaController {
+class KioskController {
 	static ArrayList<Film> films = new ArrayList<>();
 
 	static ArrayList<Ticket> tickets = new ArrayList<>();
@@ -12,6 +12,9 @@ class CinemaController {
 	static ArrayList<Ticket> orderTickets = new ArrayList<>();
 
 	static ArrayList<Seat> selectedSeats = new ArrayList<>();
+
+	private KioskController() {
+	}
 
 	private static boolean checkDuplicated(Ticket newTicket) {
 		for (Ticket ticket : tickets)
@@ -25,7 +28,7 @@ class CinemaController {
 
 	static void addOrderTicket() {
 		for (Seat seat : selectedSeats) {
-			Ticket newOrderTicket = new Ticket(seat.getFilm(), seat.getScreeningNo(), seat.getActionCommand(), seat.getTicketType());
+			Ticket newOrderTicket = new Ticket(seat.getFilm(), seat.getScreening(), seat.getSeat(), seat.getTicketType());
 			while (checkDuplicated(newOrderTicket)) {
 				newOrderTicket.generateRandomNum();
 			}
@@ -47,6 +50,12 @@ class CinemaController {
 			totalFinalPrice += ticket.getFinalPrice();
 		}
 		return totalFinalPrice;
+	}
+
+	static void payAndPrint() {
+		//Export to txt files.
+		tickets.addAll(orderTickets);
+		orderTickets = new ArrayList<>();
 	}
 
 	static ArrayList<Film> getFilms() {

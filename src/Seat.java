@@ -6,14 +6,13 @@ import javax.swing.*;
  */
 class Seat extends JToggleButton {
 	private Film film;
-	private int screeningNo;
-	private String seat;
+	private String screening;
 	private int ticketType;
 
-	Seat(String text, Film film, int screeningNo) {
+	Seat(String text, Film film, String screening) {
 		super(text);
 		this.film = film;
-		this.screeningNo = screeningNo;
+		this.screening = screening;
 	}
 
 	int getTicketType() {
@@ -28,11 +27,15 @@ class Seat extends JToggleButton {
 		return film;
 	}
 
-	int getScreeningNo() {
-		return screeningNo;
+	String getScreening() {
+		return screening;
 	}
 
 	String getSeat() {
-		return seat;
+		return this.getActionCommand();
+	}
+
+	void setSeat(String seat) {
+		this.setActionCommand(seat);
 	}
 }

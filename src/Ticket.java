@@ -33,7 +33,7 @@ class Ticket {
 	private double price;
 	private double finalPrice;
 
-	Ticket(Film film, int screeningNo, String seat, int type) {
+	Ticket(Film film, String screening, String seat, int type) {
 		this.film = film;
 		this.seat = seat;
 		this.type = type;
@@ -54,7 +54,7 @@ class Ticket {
 		}
 		price = film.getPrice();
 		finalPrice = price * (1 - discount);
-		screening = film.getScreenings().get(screeningNo);
+		this.screening = screening;
 		String[] screenAndTime = screening.split("/");
 		screen = Integer.parseInt(screenAndTime[0]);
 		time = screenAndTime[1];

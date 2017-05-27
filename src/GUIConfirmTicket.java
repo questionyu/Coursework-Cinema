@@ -19,7 +19,7 @@ class GUIConfirmTicket extends JPanel {
 				"Original Price",
 				"Discount Price"
 		};
-		ArrayList<Ticket> orderTickets = CinemaController.orderTickets;
+		ArrayList<Ticket> orderTickets = KioskController.orderTickets;
 		String[][] data = new String[orderTickets.size()][];
 		for (int i = 0; i < orderTickets.size(); i++) {
 			Ticket ticket = orderTickets.get(i);
@@ -37,7 +37,7 @@ class GUIConfirmTicket extends JPanel {
 		JTable table = new JTable(data, columnNames);
 		table.setFont(new Font(null, Font.PLAIN, 15));
 		JScrollPane scrollPane = new JScrollPane(table);
-		JLabel totalPriceLabel = new JLabel("Total Price: Original: " + CinemaController.orderTicketTotalPrice() + " After discount: " + CinemaController.orderTicketTotalFinalPrice(), JLabel.CENTER);
+		JLabel totalPriceLabel = new JLabel("Total Price: Original: " + KioskController.orderTicketTotalPrice() + " After discount: " + KioskController.orderTicketTotalFinalPrice(), JLabel.CENTER);
 		totalPriceLabel.setFont(kiosk.getButtonFont());
 
 		JPanel ticketInformationPanel = new JPanel(new BorderLayout());
@@ -60,6 +60,7 @@ class GUIConfirmTicket extends JPanel {
 		JLabel paySuccess = new JLabel("Successful!", JLabel.CENTER);
 		paySuccess.setFont(kiosk.getButtonFont());
 		payButton.addActionListener(e -> {
+			KioskController.payAndPrint();
 			JOptionPane.showMessageDialog(null, paySuccess, "Pay", JOptionPane.INFORMATION_MESSAGE);
 			kiosk.showListFilm();
 		});

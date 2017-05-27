@@ -13,10 +13,9 @@ class GUIListSeat extends JPanel implements ActionListener {
 	private int ticketType = Ticket.ADULT;
 	private Color currentColor = Ticket.ADULT_COLOR;
 
-	GUIListSeat(Kiosk kiosk, Film film, int screeningNo) {
+	GUIListSeat(Kiosk kiosk, Film film, String screening) {
 		super(new BorderLayout());
 
-		String screening = film.getScreenings().get(screeningNo);
 		String[] screen = screening.split("/");
 
 		JPanel selectSeatPanel = new JPanel(new BorderLayout());
@@ -73,9 +72,9 @@ class GUIListSeat extends JPanel implements ActionListener {
 			}
 			for (int aSeat : seat) {
 				if (aSeat == 1) {
-					Seat seatButton = new Seat("" + num, film, screeningNo);
+					Seat seatButton = new Seat("" + num, film, screening);
 					seatButton.setFont(kiosk.getButtonFont());
-					seatButton.setActionCommand(cols[col - 1].getText() + num);
+					seatButton.setSeat(cols[col - 1].getText() + num);
 					seatButton.addMouseListener(new mouseAdapter());
 					seatPanel.add(seatButton);
 					num--;
@@ -198,11 +197,11 @@ class GUIListSeat extends JPanel implements ActionListener {
 			if (seatButton.isSelected()) {
 				seatButton.setForeground(currentColor);
 				seatButton.setTicketType(ticketType);
-				System.out.println(seatButton.getActionCommand());
-				CinemaController.selectedSeats.add(seatButton);
+				System.out.println(seatButton.getSeat());
+				KioskController.selectedSeats.add(seatButton);
 			} else {
 				seatButton.setForeground(Color.BLACK);
-				CinemaController.selectedSeats.removeIf(seat1 -> seat1.getActionCommand().equals(seatButton.getActionCommand()));
+				KioskController.selectedSeats.removeIf(seat1 -> seat1.getSeat().equals(seatButton.getSeat()));
 			}
 		}
 	}

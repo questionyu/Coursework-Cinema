@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -10,23 +8,19 @@ import java.util.ArrayList;
  * Title        .java
  * Description  This class shows the films' posters.
  */
-class GUIListFilm extends JPanel implements ActionListener {
-	private Kiosk kiosk;
+class GUIListFilm extends JPanel {
 	private JButton[] numButton;
 
 	/**
 	 * Constructor.
-	 *
-	 * @param kiosk The kiosk instance.
 	 */
-	GUIListFilm(Kiosk kiosk) {
+	GUIListFilm() {
 		super(new BorderLayout());
-		this.kiosk = kiosk;
 
 		JPanel filmPosterPanel = new JPanel(new GridLayout(3, 2, 5, 5));
 		filmPosterPanel.setOpaque(false);
 
-		ArrayList<Film> films = kiosk.getFilms();
+		ArrayList<Film> films = KioskController.getFilms();
 		int showQuantity = films.size();
 
 		numButton = new JButton[showQuantity];
@@ -46,9 +40,9 @@ class GUIListFilm extends JPanel implements ActionListener {
 			filmPanel[i].setOpaque(false);
 			image[i].setImage(image[i].getImage().getScaledInstance(104, 156, Image.SCALE_DEFAULT));
 			label[i] = new JLabel(labelString[i], image[i], SwingConstants.LEFT);
-			label[i].setFont(kiosk.getButtonFont());
+			label[i].setFont(Kiosk.getButtonFont());
 			numButton[i] = new JButton("BUY");
-			numButton[i].setFont(kiosk.getButtonFont());
+			numButton[i].setFont(Kiosk.getButtonFont());
 			numButton[i].addMouseListener(new mouseAdapter(i));
 			filmPanel[i].add(label[i], BorderLayout.WEST);
 			filmPanel[i].add(numButton[i], BorderLayout.EAST);
@@ -59,12 +53,12 @@ class GUIListFilm extends JPanel implements ActionListener {
 		listFilmSouthPanel.setLayout(new BoxLayout(listFilmSouthPanel, BoxLayout.X_AXIS));
 
 		JButton exitButton = new JButton("Exit");
-		exitButton.setFont(kiosk.getButtonFont());
+		exitButton.setFont(Kiosk.getButtonFont());
 		exitButton.addActionListener(e -> System.exit(0));
 
 		JButton backButton = new JButton("Back");
-		backButton.setFont(kiosk.getButtonFont());
-		backButton.addActionListener(e -> kiosk.showWelcome());
+		backButton.setFont(Kiosk.getButtonFont());
+		backButton.addActionListener(e -> Kiosk.showWelcome());
 
 		listFilmSouthPanel.add(exitButton);
 		listFilmSouthPanel.add(Box.createHorizontalStrut(25));
@@ -72,18 +66,6 @@ class GUIListFilm extends JPanel implements ActionListener {
 		listFilmSouthPanel.add(Box.createHorizontalGlue());
 
 		add(listFilmSouthPanel, BorderLayout.SOUTH);
-	}
-
-	/**
-	 * @param e Action event.
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object eventObject = e.getSource();
-		for (JButton button : numButton) {
-			if (eventObject.equals(button))
-				System.out.println(button.getText());
-		}
 	}
 
 	class mouseAdapter extends MouseAdapter {
@@ -95,7 +77,7 @@ class GUIListFilm extends JPanel implements ActionListener {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			kiosk.listScreening(i);
+			Kiosk.listScreening(i);
 		}
 	}
 }

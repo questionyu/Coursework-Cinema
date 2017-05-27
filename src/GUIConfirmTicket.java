@@ -3,11 +3,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Title        .java
+ * Title        GUIConfirmTicket.java
  * Description  description...
  */
 class GUIConfirmTicket extends JPanel {
-	GUIConfirmTicket(Kiosk kiosk) {
+	GUIConfirmTicket() {
 		super(new BorderLayout());
 
 		String[] columnNames = {
@@ -28,7 +28,7 @@ class GUIConfirmTicket extends JPanel {
 					ticket.getTime(),
 					"" + ticket.getScreen(),
 					ticket.getSeat(),
-					ticket.getType(),
+					ticket.getTypeString(),
 					"" + ticket.getPrice(),
 					"" + ticket.getFinalPrice()
 			};
@@ -38,7 +38,7 @@ class GUIConfirmTicket extends JPanel {
 		table.setFont(new Font(null, Font.PLAIN, 15));
 		JScrollPane scrollPane = new JScrollPane(table);
 		JLabel totalPriceLabel = new JLabel("Total Price: Original: " + KioskController.orderTicketTotalPrice() + " After discount: " + KioskController.orderTicketTotalFinalPrice(), JLabel.CENTER);
-		totalPriceLabel.setFont(kiosk.getButtonFont());
+		totalPriceLabel.setFont(Kiosk.getButtonFont());
 
 		JPanel ticketInformationPanel = new JPanel(new BorderLayout());
 		ticketInformationPanel.add(scrollPane, BorderLayout.CENTER);
@@ -48,21 +48,21 @@ class GUIConfirmTicket extends JPanel {
 		confirmTicketSouthPanel.setLayout(new BoxLayout(confirmTicketSouthPanel, BoxLayout.X_AXIS));
 
 		JButton exitButton = new JButton("Exit");
-		exitButton.setFont(kiosk.getButtonFont());
+		exitButton.setFont(Kiosk.getButtonFont());
 		exitButton.addActionListener(e -> System.exit(0));
 
 		JButton backButton = new JButton("Back");
-		backButton.setFont(kiosk.getButtonFont());
-		backButton.addActionListener(e -> kiosk.showListSeat());
+		backButton.setFont(Kiosk.getButtonFont());
+		backButton.addActionListener(e -> Kiosk.showListSeat());
 
 		JButton payButton = new JButton("Pay");
-		payButton.setFont(kiosk.getButtonFont());
+		payButton.setFont(Kiosk.getButtonFont());
 		JLabel paySuccess = new JLabel("Successful!", JLabel.CENTER);
-		paySuccess.setFont(kiosk.getButtonFont());
+		paySuccess.setFont(Kiosk.getButtonFont());
 		payButton.addActionListener(e -> {
 			KioskController.payAndPrint();
 			JOptionPane.showMessageDialog(null, paySuccess, "Pay", JOptionPane.INFORMATION_MESSAGE);
-			kiosk.showListFilm();
+			Kiosk.showListFilm();
 		});
 
 		confirmTicketSouthPanel.add(exitButton);

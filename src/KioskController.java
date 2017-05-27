@@ -1,13 +1,26 @@
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Title        .java
- * Description  This class defines a cinema.
+ * Title        KioskController.java
+ * Description  This class controls the kiosk.
  */
 class KioskController {
-	static ArrayList<Film> films = new ArrayList<>();
+	static ArrayList<Film> films;
 
 	static ArrayList<Ticket> tickets = new ArrayList<>();
 
@@ -16,6 +29,15 @@ class KioskController {
 	static ArrayList<Seat> selectedSeats = new ArrayList<>();
 
 	private KioskController() {
+	}
+
+	static boolean loadFilms() {
+		films = getFilmFromFile();
+		return films != null;
+	}
+
+	static boolean saveFilms() {
+		return writeFilmToFile(films);
 	}
 
 	private static boolean checkDuplicated(Ticket newTicket) {
@@ -88,7 +110,109 @@ class KioskController {
 		return films.get(i);
 	}
 
-	static void report() {
-		//For management UI.
+	/**
+	 * This function read films form xml and save to an ArrayList, and return it.
+	 *
+	 * @return the ArrayList which contains all films.
+	 */
+	private static ArrayList<Film> getFilmFromFile() {
+		ArrayList<Film> films = new ArrayList<>();
+		try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document doc = builder.parse(new File("films.xml"));
+			NodeList filmList = doc.getElementsByTagName("film");
+
+			for (int i = 0; i < filmList.getLength(); i++) {
+				Node filmNode = filmList.item(i);
+				if (filmNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element filmElement = (Element) filmNode;
+					String name = filmElement.getElementsByTagName("name").item(0).getTextContent();
+
+					String imageUrl = filmElement.getElementsByTagName("imageUrl").item(0).getTextContent();
+
+					int length = Integer.parseInt(filmElement.getElementsByTagName("length").item(0).getTextContent());
+
+					double price = Double.parseDouble(filmElement.getElementsByTagName("price").item(0).getTextContent());
+
+					NodeList screeningList = filmElement.getElementsByTagName("screening");
+
+					ArrayList<String> screenings = new ArrayList<>();
+					for (int j = 0; j < screeningList.getLength(); j++) {
+						screenings.add(screeningList.item(j).getTextContent());
+					}
+					films.add(new Film(name, imageUrl, length, price, screenings));
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return films;
+	}
+
+	/**
+	 * This function save ArrayList of films to xml file.
+	 *
+	 * @param films The ArrayList which contains all films which you want to save to file.
+	 * @return True means save successfully, false for failed.
+	 */
+	private static boolean writeFilmToFile(ArrayList<Film> films) {
+		Document doc;
+		Element kiosk;
+		Element film;
+		Element name;
+		Element imageUrl;
+		Element length;
+		Element price;
+		Element screening;
+		try {
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dbBuilder = dbFactory.newDocumentBuilder();
+			doc = dbBuilder.newDocument();
+
+			kiosk = doc.createElement("kiosk");
+			for (Film film1 : films) {
+				film = doc.createElement("film");
+
+				name = doc.createElement("name");
+				name.appendChild(doc.createTextNode(film1.getName()));
+				film.appendChild(name);
+
+				imageUrl = doc.createElement("imageUrl");
+				imageUrl.appendChild(doc.createTextNode(film1.getImageUrl()));
+				film.appendChild(imageUrl);
+
+				length = doc.createElement("length");
+				length.appendChild(doc.createTextNode("" + film1.getLength()));
+				film.appendChild(length);
+
+				price = doc.createElement("price");
+				price.appendChild(doc.createTextNode("" + film1.getPrice()));
+				film.appendChild(price);
+
+				for (String screening1 : film1.getScreenings()) {
+					screening = doc.createElement("screening");
+					screening.appendChild(doc.createTextNode(screening1));
+					film.appendChild(screening);
+				}
+
+				kiosk.appendChild(film);
+			}
+			doc.appendChild(kiosk);
+
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(doc);
+			StreamResult result = new StreamResult(new File("films.xml"));
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+			transformer.transform(source, result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }

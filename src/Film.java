@@ -1,5 +1,8 @@
 import javax.swing.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Title        Film.java
@@ -42,5 +45,23 @@ class Film {
 
 	ArrayList<String> getScreenings() {
 		return screenings;
+	}
+
+	ArrayList<String> getTodayScreenings() {
+		ArrayList<String> todayScreenings = new ArrayList<>();
+		for (String screening : screenings) {
+			String[] time = screening.split("/");
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
+			Date date = new Date();
+			try {
+				date = simpleDateFormat.parse(time[1]);
+			} catch (ParseException e) {
+				System.out.println("screening information wrong!" + screening);
+			}
+			Date now = new Date();
+			if (now.getYear() == date.getYear() && now.getMonth() == date.getMonth() && now.getDay() == date.getDay())
+				todayScreenings.add(screening);
+		}
+		return todayScreenings;
 	}
 }

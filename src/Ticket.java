@@ -82,7 +82,7 @@ class Ticket {
 	 *
 	 * @return A string variable which save the type of ticket.
 	 */
-	String getType() {
+	String getTypeString() {
 		switch (type) {
 			case 0:
 				return "Adult";
@@ -96,12 +96,20 @@ class Ticket {
 		return null;
 	}
 
+	int getType() {
+		return type;
+	}
+
 	double getPrice() {
 		return price;
 	}
 
 	double getFinalPrice() {
 		return finalPrice;
+	}
+
+	Film getFilm() {
+		return film;
 	}
 
 	String getFilmName() {
@@ -131,7 +139,7 @@ class Ticket {
 				"Time: " + time + "\n" +
 				"Screen: " + screen + "\n" +
 				"Seat: " + seat + "\n" +
-				"Ticket type: " + this.getType() + "\n" +
+				"Ticket type: " + this.getTypeString() + "\n" +
 				"Ticket ID: " + num + "\n";
 	}
 }

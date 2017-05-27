@@ -12,8 +12,9 @@ import java.awt.event.MouseEvent;
 class GUIListSeat extends JPanel implements ActionListener {
 	private int ticketType = Ticket.ADULT;
 	private Color currentColor = Ticket.ADULT_COLOR;
+	private JButton confirmButton;
 
-	GUIListSeat(Kiosk kiosk, Film film, String screening) {
+	GUIListSeat(Film film, String screening) {
 		super(new BorderLayout());
 
 		String[] screen = screening.split("/");
@@ -26,17 +27,17 @@ class GUIListSeat extends JPanel implements ActionListener {
 
 		JLabel[] cols = new JLabel[5];
 		cols[0] = new JLabel("A", JLabel.CENTER);
-		cols[0].setFont(kiosk.getButtonFont());
+		cols[0].setFont(Kiosk.getButtonFont());
 		cols[1] = new JLabel("B", JLabel.CENTER);
-		cols[1].setFont(kiosk.getButtonFont());
+		cols[1].setFont(Kiosk.getButtonFont());
 		cols[2] = new JLabel("C", JLabel.CENTER);
-		cols[2].setFont(kiosk.getButtonFont());
+		cols[2].setFont(Kiosk.getButtonFont());
 		cols[3] = new JLabel("D", JLabel.CENTER);
-		cols[3].setFont(kiosk.getButtonFont());
+		cols[3].setFont(Kiosk.getButtonFont());
 		cols[4] = new JLabel("E", JLabel.CENTER);
-		cols[4].setFont(kiosk.getButtonFont());
+		cols[4].setFont(Kiosk.getButtonFont());
 
-		int[][] seats = null;
+		int[][] seats = new int[][]{};
 		switch (Integer.parseInt(screen[0])) {
 			case 1:
 				seats = new int[][]{{1, 1, 1, 1, 0, 1, 1, 1, 1},
@@ -73,7 +74,7 @@ class GUIListSeat extends JPanel implements ActionListener {
 			for (int aSeat : seat) {
 				if (aSeat == 1) {
 					Seat seatButton = new Seat("" + num, film, screening);
-					seatButton.setFont(kiosk.getButtonFont());
+					seatButton.setFont(Kiosk.getButtonFont());
 					seatButton.setSeat(cols[col - 1].getText() + num);
 
 					if (KioskController.checkSold(seatButton))
@@ -95,7 +96,7 @@ class GUIListSeat extends JPanel implements ActionListener {
 
 		JPanel screenLabelPanel = new JPanel();
 		JLabel screenLabel = new JLabel("Screen");
-		screenLabel.setFont(kiosk.getButtonFont());
+		screenLabel.setFont(Kiosk.getButtonFont());
 		screenLabelPanel.setBackground(Color.CYAN);
 		screenLabelPanel.add(screenLabel);
 
@@ -105,23 +106,23 @@ class GUIListSeat extends JPanel implements ActionListener {
 
 		//Radio buttons. To select a ticket type.
 		JRadioButton adult = new JRadioButton("Adult");
-		adult.setFont(kiosk.getButtonFont());
+		adult.setFont(Kiosk.getButtonFont());
 		adult.setForeground(Ticket.ADULT_COLOR);
 		adult.setActionCommand("Adult");
 		adult.setSelected(true);
 
 		JRadioButton child = new JRadioButton("Child");
-		child.setFont(kiosk.getButtonFont());
+		child.setFont(Kiosk.getButtonFont());
 		child.setForeground(Ticket.CHILD_COLOR);
 		child.setActionCommand("Child");
 
 		JRadioButton senior = new JRadioButton("Senior");
-		senior.setFont(kiosk.getButtonFont());
+		senior.setFont(Kiosk.getButtonFont());
 		senior.setForeground(Ticket.SENIOR_COLOR);
 		senior.setActionCommand("Senior");
 
 		JRadioButton student = new JRadioButton("Student");
-		student.setFont(kiosk.getButtonFont());
+		student.setFont(Kiosk.getButtonFont());
 		student.setForeground(Ticket.STUDENT_COLOR);
 		student.setActionCommand("Student");
 
@@ -152,16 +153,17 @@ class GUIListSeat extends JPanel implements ActionListener {
 		listSeatSouthPanel.setLayout(new BoxLayout(listSeatSouthPanel, BoxLayout.X_AXIS));
 
 		JButton exitButton = new JButton("Exit");
-		exitButton.setFont(kiosk.getButtonFont());
+		exitButton.setFont(Kiosk.getButtonFont());
 		exitButton.addActionListener(e -> System.exit(0));
 
 		JButton backButton = new JButton("Back");
-		backButton.setFont(kiosk.getButtonFont());
-		backButton.addActionListener(e -> kiosk.showListScreening());
+		backButton.setFont(Kiosk.getButtonFont());
+		backButton.addActionListener(e -> Kiosk.showListScreening());
 
-		JButton confirmButton = new JButton("Confirm");
-		confirmButton.setFont(kiosk.getButtonFont());
-		confirmButton.addActionListener(e -> kiosk.confirmTicket());
+		confirmButton = new JButton("Confirm");
+		confirmButton.setFont(Kiosk.getButtonFont());
+		confirmButton.addActionListener(e -> Kiosk.confirmTicket());
+		confirmButton.setEnabled(false);
 
 		listSeatSouthPanel.add(exitButton);
 		listSeatSouthPanel.add(Box.createHorizontalStrut(25));
@@ -204,9 +206,12 @@ class GUIListSeat extends JPanel implements ActionListener {
 				seatButton.setTicketType(ticketType);
 				System.out.println(seatButton.getSeat());
 				KioskController.selectedSeats.add(seatButton);
+				confirmButton.setEnabled(true);
 			} else {
 				seatButton.setForeground(Color.BLACK);
 				KioskController.selectedSeats.removeIf(seat1 -> seat1.getSeat().equals(seatButton.getSeat()));
+				if (KioskController.selectedSeats.size() < 1)
+					confirmButton.setEnabled(false);
 			}
 		}
 	}

@@ -295,7 +295,7 @@ class Ticket {
 	}
 
 	/**
-	 * This function print all ticket information.
+	 * This function prints all ticket information.
 	 *
 	 * @return A string which contains all information of ticket.
 	 */

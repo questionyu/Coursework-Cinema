@@ -231,7 +231,7 @@ class KioskController {
 	}
 
 	/**
-	 * This function save ArrayList of films to xml file.
+	 * This function saves ArrayList of films to xml file.
 	 *
 	 * @param films The ArrayList which contains all films which you want to save to file.
 	 * @return True means save successfully, false for failed.

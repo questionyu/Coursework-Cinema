@@ -26,7 +26,7 @@ class GUIReport extends JPanel {
 		String[] columnNames1 = {"Film", "Amount", "Total Sale"};
 		String[][] data1 = new String[KioskController.films.size()][];
 		for (int i = 0; i < data1.length; i++) {
-			Film film = KioskController.films.get(i);
+			Film film = KioskController.getFilm(i);
 			double total = 0.0;
 			int amount = 0;
 			for (Ticket ticket : KioskController.tickets) {

@@ -21,6 +21,11 @@ class Seat extends JToggleButton {
 	private int ticketType;
 
 	/**
+	 * This string stores the student ID. Only when the ticket is student is valid.
+	 */
+	private String studentID;
+
+	/**
 	 * Constructor function. Create a seat.
 	 *
 	 * @param text      The displayed number.
@@ -85,5 +90,23 @@ class Seat extends JToggleButton {
 	 */
 	void setSeat(String seat) {
 		this.setActionCommand(seat);
+	}
+
+	/**
+	 * Getter function of student ID.
+	 *
+	 * @return The student ID.
+	 */
+	String getStudentID() {
+		return studentID;
+	}
+
+	/**
+	 * Setter function of student ID.
+	 *
+	 * @param studentID The student ID.
+	 */
+	void setStudentID(String studentID) {
+		this.studentID = studentID;
 	}
 }

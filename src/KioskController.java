@@ -87,7 +87,11 @@ class KioskController {
 	 */
 	static void addOrderTicket() {
 		for (Seat seat : selectedSeats) {
-			Ticket newOrderTicket = new Ticket(seat.getFilm(), seat.getScreening(), seat.getSeat(), seat.getTicketType());
+			Ticket newOrderTicket;
+			if (seat.getTicketType() == Ticket.STUDENT)
+				newOrderTicket = new Ticket(seat.getFilm(), seat.getScreening(), seat.getSeat(), seat.getTicketType(), seat.getStudentID());
+			else
+				newOrderTicket = new Ticket(seat.getFilm(), seat.getScreening(), seat.getSeat(), seat.getTicketType());
 			while (checkDuplicated(newOrderTicket)) {
 				newOrderTicket.generateRandomNum();
 			}

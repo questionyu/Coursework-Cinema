@@ -217,6 +217,9 @@ class GUIListSeat extends JPanel implements ActionListener {
 		}
 	}
 
+	/**
+	 * This class extends MouseAdapter. This class's instance record the selected seats/buttons.
+	 */
 	class mouseAdapter extends MouseAdapter {
 		/**
 		 * {@inheritDoc}
@@ -225,6 +228,14 @@ class GUIListSeat extends JPanel implements ActionListener {
 		public void mouseClicked(MouseEvent e) {
 			Seat seatButton = (Seat) e.getSource();
 			if (seatButton.isSelected()) {
+				if (ticketType == Ticket.STUDENT) {
+					String studentID = JOptionPane.showInputDialog(null, "Your student ID:");
+					if (studentID == null || studentID.equals("")) {
+						seatButton.setSelected(false);
+						return;
+					}
+					seatButton.setStudentID(studentID);
+				}
 				seatButton.setForeground(currentColor);
 				seatButton.setTicketType(ticketType);
 				System.out.println(seatButton.getSeat());

@@ -121,6 +121,11 @@ class Ticket {
 	private double finalPrice;
 
 	/**
+	 * This string stores the student ID. Only when the ticket is student is valid.
+	 */
+	private String studentID;
+
+	/**
 	 * Constructor function. Create a ticket.
 	 *
 	 * @param film      The film of ticket.
@@ -153,6 +158,20 @@ class Ticket {
 		String[] screenAndTime = screening.split("/");
 		screen = Integer.parseInt(screenAndTime[0]);
 		time = screenAndTime[1];
+	}
+
+	/**
+	 * Constructor function. Create a ticket.
+	 *
+	 * @param film      The film of ticket.
+	 * @param screening The screening of ticket.
+	 * @param seat      The seat number of ticket.
+	 * @param type      The type of ticket.
+	 * @param studentID The student ID.
+	 */
+	Ticket(Film film, String screening, String seat, int type, String studentID) {
+		this(film, screening, seat, type);
+		this.studentID = studentID;
 	}
 
 	/**
@@ -282,12 +301,24 @@ class Ticket {
 	 */
 	@Override
 	public String toString() {
-		return "Ticket\n" +
-				"Film: " + film.getName() + "\n" +
-				"Time: " + time + "\n" +
-				"Screen: " + screen + "\n" +
-				"Seat: " + seat + "\n" +
-				"Ticket type: " + this.getTypeString() + "\n" +
-				"Ticket ID: " + num + "\n";
+		String toString;
+		if (type == STUDENT)
+			toString = "Ticket\n" +
+					"Film: " + film.getName() + "\n" +
+					"Time: " + time + "\n" +
+					"Screen: " + screen + "\n" +
+					"Seat: " + seat + "\n" +
+					"Ticket type: " + this.getTypeString() + "\n" +
+					"Student ID: " + studentID + "\n" +
+					"Ticket ID: " + num + "\n";
+		else
+			toString = "Ticket\n" +
+					"Film: " + film.getName() + "\n" +
+					"Time: " + time + "\n" +
+					"Screen: " + screen + "\n" +
+					"Seat: " + seat + "\n" +
+					"Ticket type: " + this.getTypeString() + "\n" +
+					"Ticket ID: " + num + "\n";
+		return toString;
 	}
 }

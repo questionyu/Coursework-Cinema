@@ -5,44 +5,44 @@
         <imageUrl>images/kong.jpg</imageUrl>
         <length>118</length>
         <price>16.0</price>
-        <screening>1/2017-05-27-15-30</screening>
-        <screening>1/2017-05-27-18-30</screening>
-        <screening>1/2017-05-27-21-00</screening>
-        <screening>2/2017-05-27-20-00</screening>
-        <screening>3/2017-05-27-20-30</screening>
+        <screening>1/2017-05-28-15-30</screening>
+        <screening>1/2017-05-28-18-30</screening>
+        <screening>1/2017-05-28-21-00</screening>
+        <screening>2/2017-05-28-20-00</screening>
+        <screening>3/2017-05-28-20-30</screening>
     </film>
     <film>
         <name>LOGAN</name>
         <imageUrl>images/logan.jpg</imageUrl>
         <length>135</length>
         <price>16.0</price>
-        <screening>3/2017-05-27-15-30</screening>
-        <screening>3/2017-05-27-18-00</screening>
+        <screening>3/2017-05-28-15-30</screening>
+        <screening>3/2017-05-28-18-00</screening>
     </film>
     <film>
         <name>BEAUTY AND THE BEAST</name>
         <imageUrl>images/beauty-and-the-beasts.jpg</imageUrl>
         <length>130</length>
         <price>16.0</price>
-        <screening>1/2017-05-27-10-00</screening>
-        <screening>1/2017-05-27-12-30</screening>
-        <screening>3/2017-05-27-10-30</screening>
-        <screening>3/2017-05-27-13-00</screening>
+        <screening>1/2017-05-28-10-00</screening>
+        <screening>1/2017-05-28-12-30</screening>
+        <screening>3/2017-05-28-10-30</screening>
+        <screening>3/2017-05-28-13-00</screening>
     </film>
     <film>
         <name>MOONLIGHT</name>
         <imageUrl>images/moonlight.jpg</imageUrl>
         <length>111</length>
         <price>16.0</price>
-        <screening>2/2017-05-27-16-00</screening>
-        <screening>2/2017-05-27-18-00</screening>
+        <screening>2/2017-05-28-16-00</screening>
+        <screening>2/2017-05-28-18-00</screening>
     </film>
     <film>
         <name>LA LA LAND</name>
         <imageUrl>images/la-la-land.jpg</imageUrl>
         <length>128</length>
         <price>16.0</price>
-        <screening>2/2017-05-27-10-30</screening>
-        <screening>2/2017-05-27-13-00</screening>
+        <screening>2/2017-05-28-10-30</screening>
+        <screening>2/2017-05-28-13-00</screening>
     </film>
 </kiosk>

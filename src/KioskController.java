@@ -72,7 +72,7 @@ class KioskController {
 	 * @param newTicket The ticket which would be checked.
 	 * @return True for duplicated, false for not.
 	 */
-	private static boolean checkDuplicated(Ticket newTicket) {
+	static boolean checkDuplicated(Ticket newTicket) {
 		for (Ticket ticket : tickets)
 			if (ticket.getNum() == newTicket.getNum())
 				return true;
@@ -193,7 +193,7 @@ class KioskController {
 	 *
 	 * @return the ArrayList which contains all films.
 	 */
-	private static ArrayList<Film> getFilmFromFile() {
+	static ArrayList<Film> getFilmFromFile() {
 		ArrayList<Film> films = new ArrayList<>();
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -236,7 +236,7 @@ class KioskController {
 	 * @param films The ArrayList which contains all films which you want to save to file.
 	 * @return True means save successfully, false for failed.
 	 */
-	private static boolean writeFilmToFile(ArrayList<Film> films) {
+	static boolean writeFilmToFile(ArrayList<Film> films) {
 		Document doc;
 		Element kiosk;
 		Element film;

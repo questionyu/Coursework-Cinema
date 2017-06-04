@@ -142,18 +142,6 @@ public class KioskControllerTest {
 	}
 
 	/**
-	 * This is the test of getFilmFromFile().
-	 *
-	 * @throws Exception Test exception
-	 */
-	@org.junit.Test
-	public void getFilmFromFileTest() throws Exception {
-
-		assertEquals("getFilmFromFile Failed", 1, KioskController.getFilmFromFile().size());
-
-	}
-
-	/**
 	 * This is the test of writeFilmFromFile().
 	 *
 	 * @throws Exception Test exception
@@ -162,6 +150,18 @@ public class KioskControllerTest {
 	public void writeFilmFromFileTest() throws Exception {
 
 		assertTrue("writeFilmFromFile Failed", KioskController.writeFilmToFile(films));
+
+	}
+
+	/**
+	 * This is the test of getFilmFromFile().
+	 *
+	 * @throws Exception Test exception
+	 */
+	@org.junit.Test
+	public void getFilmFromFileTest() throws Exception {
+
+		assertEquals("getFilmFromFile Failed", 5, KioskController.getFilmFromFile().size());
 
 	}
 

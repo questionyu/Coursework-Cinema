@@ -34,53 +34,49 @@ class GUIListSeat extends JPanel implements ActionListener {
 	GUIListSeat(Film film, String screening) {
 		super(new BorderLayout());
 
-		String[] screen = screening.split("/");
-
 		JPanel selectSeatPanel = new JPanel(new BorderLayout());
 
 		JPanel seatPanel = new JPanel();
 		JPanel rightPanel = new JPanel();
 		rightPanel.setLayout(new GridLayout(0, 1));
 
-		JLabel[] cols = new JLabel[5];
-		cols[0] = new JLabel("A", JLabel.CENTER);
-		cols[0].setFont(Kiosk.getUIMainFont());
-		cols[1] = new JLabel("B", JLabel.CENTER);
-		cols[1].setFont(Kiosk.getUIMainFont());
-		cols[2] = new JLabel("C", JLabel.CENTER);
-		cols[2].setFont(Kiosk.getUIMainFont());
-		cols[3] = new JLabel("D", JLabel.CENTER);
-		cols[3].setFont(Kiosk.getUIMainFont());
-		cols[4] = new JLabel("E", JLabel.CENTER);
-		cols[4].setFont(Kiosk.getUIMainFont());
+		JLabel[] rows = new JLabel[5];
+		rows[0] = new JLabel("A", JLabel.CENTER);
+		rows[0].setFont(Kiosk.getUIMainFont());
+		rows[1] = new JLabel("B", JLabel.CENTER);
+		rows[1].setFont(Kiosk.getUIMainFont());
+		rows[2] = new JLabel("C", JLabel.CENTER);
+		rows[2].setFont(Kiosk.getUIMainFont());
+		rows[3] = new JLabel("D", JLabel.CENTER);
+		rows[3].setFont(Kiosk.getUIMainFont());
+		rows[4] = new JLabel("E", JLabel.CENTER);
+		rows[4].setFont(Kiosk.getUIMainFont());
 
 		int[][] seats = new int[][]{};
-		switch (Integer.parseInt(screen[0])) {
-			case 1:
+		switch (screening.split("/")[0]) {
+			case "1":
 				seats = new int[][]{{1, 1, 1, 1, 0, 1, 1, 1, 1},
 						{1, 1, 1, 1, 0, 1, 1, 1, 1},
 						{1, 1, 1, 1, 0, 1, 1, 1, 1},
 						{1, 1, 1, 1, 0, 1, 1, 1, 1}};
-				seatPanel.setLayout(new GridLayout(seats.length, seats[0].length));
 				break;
-			case 2:
+			case "2":
 				seats = new int[][]{{1, 1, 1, 1, 0, 1, 1, 1, 1},
 						{0, 1, 1, 1, 0, 1, 1, 1, 0},
 						{0, 1, 1, 1, 0, 1, 1, 1, 0},
 						{0, 1, 1, 1, 0, 1, 1, 1, 0}};
-				seatPanel.setLayout(new GridLayout(seats.length, seats[0].length));
 				break;
-			case 3:
+			case "3":
 				seats = new int[][]{{1, 1, 1, 1, 1, 1, 1, 1},
 						{1, 1, 0, 1, 1, 0, 1, 1},
 						{1, 1, 0, 1, 1, 0, 1, 1},
 						{1, 1, 0, 1, 1, 0, 1, 1},
 						{1, 1, 0, 1, 1, 0, 1, 1}};
-				seatPanel.setLayout(new GridLayout(seats.length, seats[0].length));
 				break;
 		}
+		seatPanel.setLayout(new GridLayout(seats.length, seats[0].length));
 
-		int col = seats.length;
+		int row = seats.length;
 		for (int[] seat : seats) {
 			int num = 0;
 			for (int aSeat : seat) {
@@ -92,7 +88,7 @@ class GUIListSeat extends JPanel implements ActionListener {
 				if (aSeat == 1) {
 					Seat seatButton = new Seat("" + num, film, screening);
 					seatButton.setFont(Kiosk.getUIMainFont());
-					seatButton.setSeat(cols[col - 1].getText() + num);
+					seatButton.setSeat(rows[row - 1].getText() + num);
 
 					if (KioskController.checkSold(seatButton))
 						seatButton.setEnabled(false);
@@ -105,8 +101,8 @@ class GUIListSeat extends JPanel implements ActionListener {
 					seatPanel.add(new JLabel());
 				}
 			}
-			rightPanel.add(cols[col - 1]);
-			col--;
+			rightPanel.add(rows[row - 1]);
+			row--;
 		}
 
 		JPanel seatAndNumber = new JPanel(new BorderLayout());

@@ -1,6 +1,4 @@
 import javax.swing.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -114,14 +112,7 @@ class Film {
 	ArrayList<String> getTodayScreenings() {
 		ArrayList<String> todayScreenings = new ArrayList<>();
 		for (String screening : screenings) {
-			String[] time = screening.split("/");
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
-			Date date = new Date();
-			try {
-				date = simpleDateFormat.parse(time[1]);
-			} catch (ParseException e) {
-				System.out.println("screening information wrong!" + screening);
-			}
+			Date date = KioskController.convertDate(screening);
 			//This is the key. Only today's screening will be added to the ArrayList.
 			Calendar dateCalendar = Calendar.getInstance();
 			dateCalendar.setTime(date);

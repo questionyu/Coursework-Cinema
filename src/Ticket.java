@@ -201,13 +201,13 @@ class Ticket {
 	 */
 	String getTypeString() {
 		switch (type) {
-			case 0:
+			case ADULT:
 				return "Adult";
-			case 1:
+			case CHILD:
 				return "Child";
-			case 2:
+			case SENIOR:
 				return "Senior";
-			case 3:
+			case STUDENT:
 				return "Student";
 		}
 		return null;

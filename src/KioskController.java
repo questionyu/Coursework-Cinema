@@ -14,7 +14,10 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Title        KioskController.java
@@ -186,6 +189,24 @@ class KioskController {
 		JLabel sendMailSuccessful = new JLabel("Send mail successfully!", JLabel.CENTER);
 		sendMailSuccessful.setFont(Kiosk.getUIMainFont());
 		JOptionPane.showMessageDialog(null, sendMailSuccessful, "Send Mail", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	/**
+	 * This function converts string to date.
+	 *
+	 * @param date The string contains the information of date.
+	 * @return The date instance of the converted time.
+	 */
+	static Date convertDate(String date) {
+		Date newDate = new Date();
+		String[] time = date.split("/");
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
+		try {
+			newDate = simpleDateFormat.parse(time[1]);
+		} catch (ParseException e) {
+			System.out.println("screening information wrong!" + date);
+		}
+		return newDate;
 	}
 
 	/**

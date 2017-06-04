@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +12,7 @@ class GUIListScreening extends JPanel {
 	/**
 	 * Constructor function.
 	 *
-	 * @param film  The selected film.
+	 * @param film The selected film.
 	 */
 	GUIListScreening(Film film) {
 		super(new BorderLayout());
@@ -39,14 +38,7 @@ class GUIListScreening extends JPanel {
 		}
 		ArrayList<String> screenings = film.getTodayScreenings();
 		for (String screening : screenings) {
-			String[] time = screening.split("/");
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
-			Date date = new Date();
-			try {
-				date = simpleDateFormat.parse(time[1]);
-			} catch (ParseException e) {
-				System.out.println("screening information wrong!" + screening);
-			}
+			Date date = KioskController.convertDate(screening);
 			SimpleDateFormat ft = new SimpleDateFormat("HH:mm");
 			JButton screeningButton = new JButton(ft.format(date));
 			screeningButton.setFont(Kiosk.getUIMainFont());
@@ -55,17 +47,7 @@ class GUIListScreening extends JPanel {
 				screeningButton.setEnabled(false);
 			else
 				screeningButton.addActionListener(e -> Kiosk.listSeat(film, screening));
-			switch (time[0]) {
-				case "1":
-					screenButtonPanel[0].add(screeningButton);
-					break;
-				case "2":
-					screenButtonPanel[1].add(screeningButton);
-					break;
-				case "3":
-					screenButtonPanel[2].add(screeningButton);
-					break;
-			}
+			screenButtonPanel[Integer.parseInt(screening.split("/")[0]) - 1].add(screeningButton);
 		}
 
 		JPanel listScreeningSouthPanel = new JPanel();

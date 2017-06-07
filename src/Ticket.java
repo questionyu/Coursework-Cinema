@@ -301,24 +301,13 @@ class Ticket {
 	 */
 	@Override
 	public String toString() {
-		String toString;
-		if (type == STUDENT)
-			toString = "Ticket\n" +
-					"Film: " + film.getName() + "\n" +
-					"Time: " + time + "\n" +
-					"Screen: " + screen + "\n" +
-					"Seat: " + seat + "\n" +
-					"Ticket type: " + this.getTypeString() + "\n" +
-					"Student ID: " + studentID + "\n" +
-					"Ticket ID: " + num + "\n";
-		else
-			toString = "Ticket\n" +
-					"Film: " + film.getName() + "\n" +
-					"Time: " + time + "\n" +
-					"Screen: " + screen + "\n" +
-					"Seat: " + seat + "\n" +
-					"Ticket type: " + this.getTypeString() + "\n" +
-					"Ticket ID: " + num + "\n";
-		return toString;
+		return "Ticket\n" +
+				"Film: " + film.getName() + "\n" +
+				"Time: " + time + "\n" +
+				"Screen: " + screen + "\n" +
+				"Seat: " + seat + "\n" +
+				"Ticket type: " + this.getTypeString() + "\n" +
+				(type == STUDENT ? "Student ID: " + studentID + "\n" : "") +
+				"Ticket ID: " + num + "\n";
 	}
 }
